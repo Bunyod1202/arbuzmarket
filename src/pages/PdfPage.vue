@@ -1,6 +1,5 @@
 <template>
   <q-page>
-    <NewYear />
     <div ref="contentToPrint">
       <!-- <button @click="generatePDF()">Download PDF</button> -->
       <div class="banner">
@@ -29,10 +28,7 @@
 
 <script setup>
 import axios from 'axios'
-import NewYear from 'src/components/NewYear.vue'
 import ProductCard from 'src/components/ProductCard.vue'
-// import jsPDF from 'jspdf'
-// import html2canvas from 'html2canvas'
 import { onMounted, ref } from 'vue'
 
 let products = []
