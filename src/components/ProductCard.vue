@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style scoped>
+img {
+  margin: 0;
+}
 .product-card {
   text-decoration: none;
   height: 100%;
@@ -37,16 +40,19 @@ export default {
   text-align: center;
   background-color: #fff;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* overflow: hidden; */
 }
 
 .product-card__image {
-  max-width: 100%;
+  width: 100%;
   height: 150px;
   margin-bottom: 10px;
+  object-fit: contain;
+  object-position: 50% 50%;
 }
 
 .product-card__price {
