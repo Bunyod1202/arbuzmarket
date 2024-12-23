@@ -1,9 +1,153 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
   <diagram name="Page-1" id="q3jjGNPkTlvUBoBiNHRm">
-    <mxGraphModel>
+    <mxGraphModel dx="819" dy="398" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="860" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-2" value="APP,Web" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="50" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-4" value="Registerda WhatSapp&amp;nbsp;, FaceBook, Gmail" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-5" value="Registration" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-6" value="Address, WhatSapp, Telegram,Telefon raqam olinishi kerak" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="110" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-7" value="Zakaz qilishdan oldin&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="215" y="110" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-8" value="Online to&#39;lovni disabled qilish" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="110" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-9" value="Zakaz Berayotganda&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-10" value="User malumotlarini Auto to&#39;ldirish" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="110" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-11" value="Zakaz qilishdan oldin&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="495" y="110" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-12" value="Uzum tezkorga oxshab addressni Aniqlashtirish" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="110" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-13" value="Appga kirganda" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="635" y="110" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-14" value="Card banner qo&#39;shish social media uchun" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="110" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-15" value="Appga kirganda" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="775" y="110" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-17" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="310" width="860" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-18" value="APP" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-19" value="Karzinkada zakaz qilib bo&#39;lmayabdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-20" value="Karzinkada" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-21" value="Zakaz qilmagan bo&#39;lsamxam zakazarni ko&#39;rsatayabdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="380" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-22" value="My orders" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="215" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-23" value="Otzov qoldirib bo&#39;lmayabdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="380" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-24" value="Product" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="380" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-25" value="Tavar tanlangandan keyin atmen qilib bo&#39;lmayabdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="380" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-26" value="Product" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="495" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-27" value="Public offer qo&#39;shish" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="380" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-28" value="Public offer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="635" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-29" value="categotia nomlarini enda uzb turibdi almashtirish kerak" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="380" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-30" value="Category" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="775" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-31" value="banneri enda ru turibdi O&#39;zgartirish kerak" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="510" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-32" value="Favorites" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="510" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-33" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="860" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-34" value="Web" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="690" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-35" value="email po&#39;chtani o&#39;zgartirish va teleforn taqamlarga link qo&#39;yish" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="750" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-36" value="Footer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="750" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-37" value="Shipping policy, Terms of use, About, Return policy enda ru turibdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="750" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-38" value="Public offer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="215" y="750" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-41" value="Registerda WhatSapp&amp;nbsp;, FaceBook, Gmail" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="750" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-42" value="&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="495" y="750" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-43" value="Zakaz qilayotganda address qismi ishlamayabdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="750" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-44" value="Zakaz qilayotganda" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="635" y="750" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-51" value="Zakaz qilmagan bo&#39;lsamxam zakazarni ko&#39;rsatayabdi" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="750" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-52" value="My orders" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="355" y="750" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-53" value="Registration" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="120" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-54" value="Registration" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="750" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-55" value="Uzb qo&#39;shish" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="750" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-56" value="Language" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="775" y="750" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-57" value="Product ichida bannerni olib tashlash" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="880" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bvQdWVOo1JS8h1f4SdfU-62" value="Product" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="75" y="880" width="90" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
