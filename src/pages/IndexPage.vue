@@ -457,6 +457,7 @@ body {
     display: none;
   }
   .banner_mobile_img {
+    height: 260px;
     width: 100%;
     display: block;
   }
