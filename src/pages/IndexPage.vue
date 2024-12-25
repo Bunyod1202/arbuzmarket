@@ -373,6 +373,7 @@ let intervalID = setInterval(() => {
   text-align: center;
 }
 .more-btn {
+  cursor: pointer;
   width: 100%;
   background-color: #6a983c;
   border: 2px solid #46760a;
