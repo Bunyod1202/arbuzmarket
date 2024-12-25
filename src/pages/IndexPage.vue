@@ -377,7 +377,7 @@ let intervalID = setInterval(() => {
   background-color: #6a983c;
   border: 2px solid #46760a;
   border-radius: 12px;
-  padding: 4px 18px;
+  padding: 8px 18px;
   color: #ffffff;
   font-size: 18px;
   font-weight: bold;
