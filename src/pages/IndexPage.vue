@@ -148,6 +148,7 @@
           <q-btn-dropdown class="glossy" label="Категории">
             <q-list>
               <q-item
+                v-close-popup
                 v-for="category in categorys"
                 :key="category.id"
                 clickable
@@ -207,8 +208,9 @@
 
 <script setup>
 import axios from 'axios'
-import ProductCard from 'src/components/ProductCard.vue'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, defineAsyncComponent } from 'vue'
+
+const ProductCard = defineAsyncComponent(() => import('src/components/ProductCard.vue'))
 const tab = ref('135')
 const page = ref(1)
 let products = ref([])
