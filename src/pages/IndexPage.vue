@@ -182,6 +182,9 @@
                     :productName="item.name"
                   />
                 </div>
+                <button v-if="page != null" class="more-btn" @click="addMore()">
+                  Показать еще
+                </button>
               </div>
               <div v-else class="text-h6">
                 <h5 class="text-h5 category-name text-weight-bold">
@@ -207,21 +210,52 @@ import axios from 'axios'
 import ProductCard from 'src/components/ProductCard.vue'
 import { onMounted, ref, watch } from 'vue'
 const tab = ref('135')
+const page = ref(1)
 let products = ref([])
 let categorys = ref([])
+let ress = true
 //
 const fetchProducts = async function (tab) {
   console.log(tab)
   try {
     const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
-      page: 1,
-      size: 1000,
+      page: page.value,
+      size: 12,
       categoryId: '' + tab,
       tab: null,
     })
+
     products.value = response.data.item
+
+    if (ress) {
+      ress = false
+      if (response.data.item.length < 12) {
+        page.value = null
+      } else {
+        page.value++
+      }
+    }
   } catch (error) {
     console.error('Error fetching products:', error)
+  }
+}
+const addMore = async function () {
+  if (page.value != null) {
+    try {
+      const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
+        page: page.value,
+        size: 12,
+        categoryId: '' + tab.value,
+        tab: null,
+      })
+      page.value++
+      if (response.data.item.length < 12) {
+        page.value = null
+      }
+      products.value = [...products.value, ...response.data.item]
+    } catch (error) {
+      console.error('Error fetching products:', error)
+    }
   }
 }
 const fetchCategory = async function () {
@@ -241,6 +275,8 @@ onMounted(() => {
 watch(
   () => tab.value,
   () => {
+    page.value = 1
+    ress = true
     fetchProducts(tab.value)
     console.log(tab.value)
   },
@@ -335,6 +371,16 @@ let intervalID = setInterval(() => {
 }
 .category-name {
   text-align: center;
+}
+.more-btn {
+  width: 100%;
+  background-color: #6a983c;
+  border: 2px solid #46760a;
+  border-radius: 12px;
+  padding: 4px 18px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
 }
 .banner_img {
   width: 100%;
@@ -463,6 +509,7 @@ body {
   }
   .banner-content {
     padding: 20px;
+    height: 100%;
   }
   .banner_description {
     margin-bottom: 7px;
@@ -543,12 +590,66 @@ body {
     gap: 24px 22px;
     grid-template-columns: repeat(4, minmax(0px, 1fr));
   }
+  .banner {
+    width: 90%;
+    margin: 10px auto;
+  }
+  .banner-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .banner_description {
+    margin-top: 50px;
+    width: 45%;
+    font-size: 22px;
+    line-height: 35px;
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .banner_title {
+    width: 70%;
+    font-size: 38px;
+    line-height: 50px;
+    margin: 0;
+  }
+  .number-group {
+    margin-top: 25px;
+  }
+  .number-group__item {
+    &__title {
+      font-size: 18px;
+      line-height: 25px;
+    }
+    &__number {
+      font-size: 18px;
+      line-height: 25px;
+    }
+  }
+  .banner_img {
+    display: block;
+  }
+  .banner_mobile_img {
+    display: none;
+  }
+  .social-media {
+    a {
+      margin-right: 10px;
+    }
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
 }
 @media screen and (min-width: 70em) {
   .cards {
     margin-bottom: 24px;
     gap: 24px 22px;
-    grid-template-columns: repeat(5, minmax(0px, 1fr));
+    grid-template-columns: repeat(6, minmax(0px, 1fr));
   }
   .banner {
     width: 90%;
@@ -556,6 +657,9 @@ body {
   }
   .banner-content {
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .banner_description {
     margin-top: 50px;
@@ -586,6 +690,12 @@ body {
       line-height: 30px;
     }
   }
+  .banner_img {
+    display: block;
+  }
+  .banner_mobile_img {
+    display: none;
+  }
   .social-media {
     a {
       margin-right: 10px;
@@ -605,6 +715,12 @@ body {
     margin-bottom: 24px;
     gap: 24px 22px;
     grid-template-columns: repeat(6, minmax(0px, 1fr));
+  }
+  .banner_img {
+    display: block;
+  }
+  .banner_mobile_img {
+    display: none;
   }
   .banner-content {
     padding: 30px;

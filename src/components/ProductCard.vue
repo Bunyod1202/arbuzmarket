@@ -118,7 +118,8 @@ img {
     font-size: 14px;
   }
 }
-@media screen and (min-width: 85em) {
+
+@media screen and (min-width: 60em) {
   .product-card {
     text-decoration: none;
     height: 100%;
