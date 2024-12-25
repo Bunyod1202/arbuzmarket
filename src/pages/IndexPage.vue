@@ -145,7 +145,7 @@
           </div>
         </div>
         <q-card class="product-tab">
-          <q-btn-dropdown class="glossy" color="primary" label="Категории">
+          <q-btn-dropdown class="glossy" label="Категории">
             <q-list>
               <q-item
                 v-for="category in categorys"
@@ -329,6 +329,15 @@ let intervalID = setInterval(() => {
 }, 1000)
 </script>
 <style lang="scss">
+.glossy {
+  background-color: #6a983c;
+  border: 2px solid #46760a;
+  border-radius: 12px;
+  padding: 8px 18px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+}
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
