@@ -5,8 +5,9 @@
         <q-skeleton v-if="!imageSrc" height="150px" square />
         <q-img
           :src="imageSrc"
-          spinner-color="primary"
+          spinner-color="green-9"
           :alt="productName"
+          ratio="16/9"
           class="product-card__image"
         />
 
