@@ -4,10 +4,14 @@
       <!-- <button @click="generatePDF()">Download PDF</button> -->
       <div class="hiro-section">
         <div class="banner">
+          <h1 class="banner_title">Свежие продукты из солнечного Узбекистана</h1>
+          <p class="banner_description">
+            Бесплатная доставка 24 часа по всему Дубаю, Шарже и Аджмана.
+          </p>
           <!-- <img class="banner_img" src="/pdfBanner.png" alt="" /> -->
           <div class="number-group">
             <div class="number-group__item">
-              <p class="number-group__item__title">Доставка:</p>
+              <p class="number-group__item__title">Дейра:</p>
               <a class="number-group__item__number" href="tel:+971505442344">+971505442344</a>
             </div>
             <div class="number-group__item">
@@ -119,6 +123,18 @@
             :products="products"
             :categorys="categorys"
           />
+          <div v-if="products.length > 0" class="btn-wrapper">
+            <button v-if="pages != null" class="more-btn" @click="addMore()">Показать еще</button>
+            <q-pagination
+              v-if="pagelimit > 1"
+              class="pagination"
+              color="#6a983c"
+              v-model="pagination"
+              :max="pagelimit"
+              direction-links
+              gutter="sm"
+            />
+          </div>
         </div>
       </div>
       <!-- <div class="banner">
@@ -149,12 +165,18 @@
 import axios from 'axios'
 import CategoryList from 'src/components/CategoryList.vue'
 import ProductCardPdf from 'src/components/ProductCardPdf.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 let products = ref([])
 let component = ref(CategoryList)
 let categoryName = ref('')
 let categorys = ref([])
+let pagelimit = ref(0)
+const pages = ref(1)
+const pagination = ref(1)
+const tab = ref('')
+let ress = true
+let stepper = true
 //
 
 onMounted(() => {
@@ -169,35 +191,91 @@ const fetchCategory = async function () {
     console.error('Error fetching products:', error)
   }
 }
-const fetchProducts = async function (id) {
+const fetchProducts = async function (id, page) {
   console.log(id)
+  tab.value = id
   try {
     const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
+      page: page,
+      size: 12,
+      categoryId: '' + id,
+      tab: null,
+    })
+    const rest = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
       page: 1,
       size: 1000,
       categoryId: '' + id,
       tab: null,
     })
+    pagelimit.value = Math.ceil(rest.data.item.length / 12)
     products.value = response.data.item
+
+    if (ress) {
+      console.log('pagessss: ' + page)
+      ress = false
+      if (response.data.item.length < 12) {
+        pages.value = null
+      } else {
+        pages.value = ++page
+      }
+    }
     console.log('category id: ' + products.value)
   } catch (error) {
     console.error('Error fetching products:', error)
+  }
+}
+const addMore = async function () {
+  if (pages.value != null) {
+    console.log('pages: ' + pages.value)
+
+    try {
+      const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
+        page: pages.value,
+        size: 12,
+        categoryId: '' + tab.value,
+        tab: null,
+      })
+      pages.value++
+      if (response.data.item.length < 12) {
+        pages.value = null
+      }
+      products.value = [...products.value, ...response.data.item]
+      ++pagination.value
+      stepper = false
+    } catch (error) {
+      console.error('Error fetching products:', error)
+    }
   }
 }
 const nextPage = (page) => {
   switch (page.nextPage) {
     case 0:
       component.value = CategoryList
-
+      pages.value = 1
+      pagination.value = 1
+      ress = true
+      stepper = true
       break
     case 1:
       component.value = ProductCardPdf
       categoryName.value = page.categoryName
-      fetchProducts(page.categoryId)
+
+      fetchProducts(page.categoryId, pagination.value)
       break
   }
 }
-
+watch(
+  () => pagination.value,
+  () => {
+    if (stepper) {
+      pages.value = 1
+      ress = true
+      fetchProducts(tab.value, pagination.value)
+      console.log(tab.value)
+    }
+    stepper = true
+  },
+)
 // const getMinimumPrice = (item) => {
 //   const prices = item.variations[0].prices
 //     .map((price) => price.value)
@@ -208,13 +286,44 @@ const nextPage = (page) => {
 //   return res[1] ? res[1] : res[2]
 // }
 </script>
+<style>
+.pagination {
+  justify-content: center;
+  margin: 7px 0;
+}
+.text-white {
+  background-color: #6a983c;
+}
+@media screen and (max-width: 1024px) {
+  body {
+    overflow: auto;
+  }
+  .hiro-section {
+    flex-direction: column;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
+.btn-wrapper {
+  padding: 10px 20px;
+}
+.more-btn {
+  cursor: pointer;
+  width: 100%;
+  background-color: #6a983c;
+  border: 2px solid #46760a;
+  border-radius: 12px;
+  padding: 8px 18px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+}
 .hiro-section {
   display: flex;
 }
 .banner {
-  width: 35%;
+  width: 550px;
   height: 100vh;
   background-color: #46760a;
   position: relative;
@@ -283,7 +392,158 @@ const nextPage = (page) => {
     height: 50px;
   }
 }
+.banner_title {
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 49px;
+  color: #ffffff;
+  text-shadow:
+    1px 1px 3px #497620,
+    0 0 1em #000,
+    0 0 0.2em #000;
+  padding: 20px;
+  margin-top: 30px;
+}
+.banner_description {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 40px;
+  color: #ffffff;
+  text-shadow:
+    1px 1px 3px #497620,
+    0 0 1em #000,
+    0 0 0.2em #000;
+  padding: 20px;
+}
 
+@media screen and (max-width: 3000px) {
+  .banner {
+    width: 45%;
+  }
+  .social-media {
+    display: block;
+    a {
+      margin-right: 5px;
+    }
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+@media screen and (max-width: 1394px) {
+  .banner {
+    width: 550px;
+  }
+  .social-media {
+    display: block;
+    a {
+      margin-right: 5px;
+    }
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+@media screen and (max-width: 1044px) {
+  .banner_title {
+    margin-top: 30px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .banner_description {
+    margin-top: 20px;
+    font-size: 25px;
+    line-height: 30px;
+  }
+  .social-media {
+    a {
+      display: block;
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .banner_title {
+    padding: 10px 40px;
+    margin-top: 10px;
+    font-size: 70px;
+    line-height: 70px;
+  }
+  .banner_description {
+    margin-top: 0px;
+    padding: 10px 40px;
+    font-size: 55px;
+    line-height: 50px;
+  }
+  .number-group__item {
+    &__title {
+      font-size: 25px;
+    }
+    &__number {
+      font-size: 25px;
+    }
+  }
+  .social-media {
+    a {
+      display: inline;
+    }
+    svg {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  .banner {
+    width: 100%;
+  }
+  .products {
+    width: 100%;
+  }
+  .hiro-section {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 768px) {
+  .banner {
+    height: 800px;
+  }
+  .banner_title {
+    padding: 10px 40px;
+    margin-top: 10px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .banner_description {
+    margin-top: 0px;
+    padding: 10px 40px;
+    font-size: 25px;
+    line-height: 40px;
+  }
+  .number-group {
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .social-media {
+    width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+@media screen and (max-height: 400px) {
+  .banner_title {
+    padding: 10px 40px;
+    margin-top: 10px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .banner_description {
+    padding: 10px 40px;
+    margin-top: 10px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
 // .product-list {
 //   width: 100%;
 //   max-width: 1200px;

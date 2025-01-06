@@ -2,7 +2,7 @@
   <div class="products-wrapper">
     <button class="btn back-btn" @click="nextPage({ categoryId: null, nextPage: 0 })">назад</button>
     <h4 class="text-h5 product-name text-weight-bold">{{ props.categoryName }}</h4>
-    <div class="product-cards row justify-center q-gutter-sm">
+    <div class="product-cards" v-if="props.products.length > 0">
       <div class="product-card" v-for="item in props.products" :key="item.id">
         <div class="product-card__details">
           <q-skeleton v-if="!item.variations[0].files[0]?.url" height="150px" square />
@@ -13,12 +13,26 @@
             class="product-card__image"
           />
 
-          <div class="product-card__name">{{ item.name }}</div>
+          <div class="product-card__name">
+            {{ item.name }}
+            <q-tooltip
+              class="tooltip bg-lime-11 text-grey-10 text-body2 text-caption"
+              :offset="[10, 10]"
+            >
+              {{ item.name }}
+            </q-tooltip>
+          </div>
         </div>
 
         <div class="product-card__price">
           <span class="product-card__price__normal">{{ getMinimumPrice(item) }} AED</span>
         </div>
+      </div>
+    </div>
+    <div class="" v-else>
+      <div class="no-items">
+        <img src="public/no-items.png" alt="" />
+        <h2 class="text-h5 category-name text-weight-bold">Попробуйте изменить параметры</h2>
       </div>
     </div>
   </div>
@@ -63,14 +77,26 @@ const getMinimumPrice = (item) => {
   text-align: center;
   margin: 20px 0;
 }
+.no-items {
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tooltip {
+  border: 1px solid #000;
+}
 .product-cards {
   padding: 20px;
   width: 100%;
-  height: 90vh;
+  height: 76vh;
   overflow-y: scroll;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(5, minmax(0px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: start !important;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -119,14 +145,13 @@ const getMinimumPrice = (item) => {
 }
 .product-card {
   text-decoration: none;
-  height: 100%;
+  height: 290px;
   width: 170px;
   border: 2px solid #ddd;
   border-radius: 8px;
   padding: 16px;
   text-align: center;
   background-color: #fff;
-  margin: auto;
   margin-top: 15px;
   display: flex;
   flex-direction: column;
@@ -144,15 +169,16 @@ const getMinimumPrice = (item) => {
 
 .product-card__price {
   position: relative;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 
   /* background: #004d00; */
-  color: #ffffff;
+  color: #000;
   padding: 4px 18px;
   border-radius: 12px;
-  background-color: #6a983c;
-  border: 2px solid #46760a;
+  background-color: transparent;
+  // background-color: #6a983c;
+  // border: 2px solid #46760a;
   gap: 11px;
   grid-template-columns: 1fr 0.2fr;
 }
@@ -173,5 +199,89 @@ const getMinimumPrice = (item) => {
   font-size: 13.8906px;
   line-height: 20px;
   color: #1a202c;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Ko'rsatmoqchi bo'lgan qatorlar soni */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5; /* Matnning qatordagi balandligi */
+  max-height: calc(1.5em * 3); /* Qator balandligi x qatorlar soni */
 }
+// @media screen and (max-width: 1394px) {
+
+// }
+// @media screen and (max-width: 1200px) {
+
+// }
+@media screen and (max-width: 768px) {
+  .product-name {
+    margin-bottom: 55px;
+  }
+  .back-btn {
+    top: 35px;
+  }
+  .product-cards {
+    gap: 10px;
+
+    height: 70vh;
+  }
+}
+// @media screen and (min-width: 20em) {
+//   .product-card {
+//     text-decoration: none;
+//     height: 100%;
+//     width: 130px;
+//     border: 2px solid #ddd;
+//     border-radius: 8px;
+//     padding: 14px;
+//     text-align: center;
+//     background-color: #fff;
+//     margin: auto;
+//     margin-top: 15px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     /* overflow: hidden; */
+//   }
+//   .product-card__image {
+//     width: 100%;
+//     height: 80px;
+//     margin-bottom: 10px;
+//     object-fit: contain;
+//     object-position: 50% 50%;
+//   }
+//   .product-card__price {
+//     font-size: 14px;
+//   }
+// }
+
+// @media screen and (min-width: 60em) {
+//   .product-card {
+//     text-decoration: none;
+//     height: 100%;
+//     width: 170px;
+//     border: 2px solid #ddd;
+//     border-radius: 8px;
+//     padding: 16px;
+//     text-align: center;
+//     background-color: #fff;
+//     margin: auto;
+//     margin-top: 15px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     /* overflow: hidden; */
+//   }
+//   .product-card__image {
+//     width: 100%;
+//     height: 150px;
+//     margin-bottom: 10px;
+//     object-fit: contain;
+//     object-position: 50% 50%;
+//   }
+//   .product-card__price {
+//     font-size: 18px;
+//   }
+// }
 </style>
