@@ -16,7 +16,9 @@
           <div class="product-card__name">
             {{ item.name }}
             <q-tooltip
-              class="tooltip bg-lime-11 text-grey-10 text-body2 text-caption"
+              anchor="top middle"
+              self="bottom middle"
+              class="tooltip top bg-lime-11 text-grey-10 text-body2 text-caption"
               :offset="[10, 10]"
             >
               {{ item.name }}
@@ -91,7 +93,7 @@ const getMinimumPrice = (item) => {
 .product-cards {
   padding: 20px;
   width: 100%;
-  height: 76vh;
+  height: 90vh;
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
@@ -214,6 +216,7 @@ const getMinimumPrice = (item) => {
 // @media screen and (max-width: 1200px) {
 
 // }
+
 @media screen and (max-width: 768px) {
   .product-name {
     margin-bottom: 55px;
@@ -227,61 +230,48 @@ const getMinimumPrice = (item) => {
     height: 70vh;
   }
 }
-// @media screen and (min-width: 20em) {
-//   .product-card {
-//     text-decoration: none;
-//     height: 100%;
-//     width: 130px;
-//     border: 2px solid #ddd;
-//     border-radius: 8px;
-//     padding: 14px;
-//     text-align: center;
-//     background-color: #fff;
-//     margin: auto;
-//     margin-top: 15px;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     /* overflow: hidden; */
-//   }
-//   .product-card__image {
-//     width: 100%;
-//     height: 80px;
-//     margin-bottom: 10px;
-//     object-fit: contain;
-//     object-position: 50% 50%;
-//   }
-//   .product-card__price {
-//     font-size: 14px;
-//   }
-// }
+@media screen and (max-width: 500px) {
+  .product-card {
+    text-decoration: none;
+    height: 200px;
+    width: 115px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 6px;
+    text-align: center;
+    background-color: #fff;
 
-// @media screen and (min-width: 60em) {
-//   .product-card {
-//     text-decoration: none;
-//     height: 100%;
-//     width: 170px;
-//     border: 2px solid #ddd;
-//     border-radius: 8px;
-//     padding: 16px;
-//     text-align: center;
-//     background-color: #fff;
-//     margin: auto;
-//     margin-top: 15px;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     /* overflow: hidden; */
-//   }
-//   .product-card__image {
-//     width: 100%;
-//     height: 150px;
-//     margin-bottom: 10px;
-//     object-fit: contain;
-//     object-position: 50% 50%;
-//   }
-//   .product-card__price {
-//     font-size: 18px;
-//   }
-// }
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* overflow: hidden; */
+  }
+  .product-card__name {
+    text-align: start;
+    font-weight: 600;
+    font-size: 13.8906px;
+    line-height: 20px;
+    color: #1a202c;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Ko'rsatmoqchi bo'lgan qatorlar soni */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5; /* Matnning qatordagi balandligi */
+    max-height: calc(1.5em * 3); /* Qator balandligi x qatorlar soni */
+  }
+  .product-card__image {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+  .product-card__price {
+    font-size: 14px;
+    padding: 4px;
+  }
+}
 </style>

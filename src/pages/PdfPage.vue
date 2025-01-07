@@ -10,6 +10,9 @@
           </p>
           <!-- <img class="banner_img" src="/pdfBanner.png" alt="" /> -->
           <div class="number-group">
+            <div class="click-to-call">
+              <img src="../../public/arrow.gif" alt="" />
+            </div>
             <div class="number-group__item">
               <p class="number-group__item__title">Дейра:</p>
               <a class="number-group__item__number" href="tel:+971505442344">+971505442344</a>
@@ -24,6 +27,7 @@
             </div>
           </div>
           <div class="social-media">
+            <p class="social-media__text">Подпишитесь на нас :</p>
             <a
               href="https://www.instagram.com/products_fromuzb/profilecard/?igsh=MW9ueDM2dTd6Z2pyYw=="
               target="blank"
@@ -123,7 +127,7 @@
             :products="products"
             :categorys="categorys"
           />
-          <div v-if="products.length > 0" class="btn-wrapper">
+          <!-- <div v-if="products.length > 0" class="btn-wrapper">
             <button v-if="pages != null" class="more-btn" @click="addMore()">Показать еще</button>
             <q-pagination
               v-if="pagelimit > 1"
@@ -134,7 +138,7 @@
               direction-links
               gutter="sm"
             />
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- <div class="banner">
@@ -171,7 +175,7 @@ let products = ref([])
 let component = ref(CategoryList)
 let categoryName = ref('')
 let categorys = ref([])
-let pagelimit = ref(0)
+// let pagelimit = ref(0)
 const pages = ref(1)
 const pagination = ref(1)
 const tab = ref('')
@@ -197,17 +201,17 @@ const fetchProducts = async function (id, page) {
   try {
     const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
       page: page,
-      size: 12,
-      categoryId: '' + id,
-      tab: null,
-    })
-    const rest = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
-      page: 1,
       size: 1000,
       categoryId: '' + id,
       tab: null,
     })
-    pagelimit.value = Math.ceil(rest.data.item.length / 12)
+    // const rest = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
+    //   page: 1,
+    //   size: 1000,
+    //   categoryId: '' + id,
+    //   tab: null,
+    // })
+    // pagelimit.value = Math.ceil(rest.data.item.length / 12)
     products.value = response.data.item
 
     if (ress) {
@@ -224,29 +228,29 @@ const fetchProducts = async function (id, page) {
     console.error('Error fetching products:', error)
   }
 }
-const addMore = async function () {
-  if (pages.value != null) {
-    console.log('pages: ' + pages.value)
+// const addMore = async function () {
+//   if (pages.value != null) {
+//     console.log('pages: ' + pages.value)
 
-    try {
-      const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
-        page: pages.value,
-        size: 12,
-        categoryId: '' + tab.value,
-        tab: null,
-      })
-      pages.value++
-      if (response.data.item.length < 12) {
-        pages.value = null
-      }
-      products.value = [...products.value, ...response.data.item]
-      ++pagination.value
-      stepper = false
-    } catch (error) {
-      console.error('Error fetching products:', error)
-    }
-  }
-}
+//     try {
+//       const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
+//         page: pages.value,
+//         size: 12,
+//         categoryId: '' + tab.value,
+//         tab: null,
+//       })
+//       pages.value++
+//       if (response.data.item.length < 12) {
+//         pages.value = null
+//       }
+//       products.value = [...products.value, ...response.data.item]
+//       ++pagination.value
+//       stepper = false
+//     } catch (error) {
+//       console.error('Error fetching products:', error)
+//     }
+//   }
+// }
 const nextPage = (page) => {
   switch (page.nextPage) {
     case 0:
@@ -379,6 +383,16 @@ watch(
     }
   }
 }
+.click-to-call {
+  position: absolute;
+  top: 0px;
+  right: -35px;
+  img {
+    transform: rotate(-40deg);
+    width: 70px;
+    height: 70px;
+  }
+}
 .social-media {
   position: absolute;
   z-index: 3;
@@ -391,6 +405,14 @@ watch(
     width: 50px;
     height: 50px;
   }
+}
+.social-media__text {
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0px 0px 4px rgb(0, 0, 0);
 }
 .banner_title {
   font-weight: 400;
