@@ -213,9 +213,9 @@ let ress = true
 let stepper = true
 //
 const languageOptions = [
-  { value: 'en', label: 'English', icon: '../../public/icons/en.svg' },
-  { value: 'uz', label: 'Uzbek', icon: '../../public/icons/uz.svg' },
-  { value: 'ru', label: 'Russian', icon: '../../public/icons/ru.svg' },
+  { value: 'en', label: 'English', icon: 'icons/en.svg' },
+  { value: 'uz', label: 'Uzbek', icon: 'icons/uz.svg' },
+  { value: 'ru', label: 'Russian', icon: 'icons/ru.svg' },
 ]
 const selectedLang = ref(localStorage.getItem('language') || 'en')
 locale.value = selectedLang.value
