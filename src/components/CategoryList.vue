@@ -17,9 +17,6 @@
         />
         <h5>{{ category.name }}</h5>
       </div>
-      <pre>
-        {{ props.categorys }}
-      </pre>
     </div>
   </div>
 </template>
