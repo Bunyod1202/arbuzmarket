@@ -218,7 +218,6 @@ let categorys = ref([])
 let ress = true
 //
 const fetchProducts = async function (tab) {
-  console.log(tab)
   try {
     const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
       page: page.value,
@@ -280,7 +279,6 @@ watch(
     page.value = 1
     ress = true
     fetchProducts(tab.value)
-    console.log(tab.value)
   },
 )
 function splitArrayIntoChunks(products) {
@@ -323,8 +321,6 @@ const getMinimumPrice = (item) => {
 
 let intervalID = setInterval(() => {
   if (products.value?.length > 0) {
-    console.log(products.value)
-
     chunkedArray.value = splitArrayIntoChunks(products.value, chunkSize)
     clearInterval(intervalID)
   }

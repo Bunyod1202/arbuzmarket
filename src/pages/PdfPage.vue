@@ -4,9 +4,9 @@
       <!-- <button @click="generatePDF()">Download PDF</button> -->
       <div class="hiro-section">
         <div class="banner">
-          <h1 class="banner_title">Свежие продукты из солнечного Узбекистана</h1>
+          <h1 class="banner_title">{{ $t('title') }}</h1>
           <p class="banner_description">
-            Бесплатная доставка 24 часа по всему Дубаю, Шарже и Аджмана.
+            {{ $t('description') }}
           </p>
           <!-- <img class="banner_img" src="/pdfBanner.png" alt="" /> -->
           <div class="number-group">
@@ -14,20 +14,20 @@
               <img src="../../public/arrow.gif" alt="" />
             </div>
             <div class="number-group__item">
-              <p class="number-group__item__title">Дейра:</p>
+              <p class="number-group__item__title">{{ $t('contacts.address') }}</p>
               <a class="number-group__item__number" href="tel:+971505442344">+971505442344</a>
             </div>
             <div class="number-group__item">
-              <p class="number-group__item__title">Аджман:</p>
+              <p class="number-group__item__title">{{ $t('contacts.address1') }}</p>
               <a class="number-group__item__number" href="tel:+971525010022">+971525010022</a>
             </div>
             <div class="number-group__item">
-              <p class="number-group__item__title">Жлт:</p>
+              <p class="number-group__item__title">{{ $t('contacts.address2') }}</p>
               <a class="number-group__item__number" href="tel:+971551944000">+971551944000</a>
             </div>
           </div>
           <div class="social-media">
-            <p class="social-media__text">Подпишитесь на нас :</p>
+            <p class="social-media__text">{{ $t('biSubscription') }}</p>
             <a
               href="https://www.instagram.com/products_fromuzb/profilecard/?igsh=MW9ueDM2dTd6Z2pyYw=="
               target="blank"
@@ -120,6 +120,34 @@
           </div>
         </div>
         <div class="products">
+          <q-select
+            class="lang-select"
+            v-model="selectedLang"
+            @update:model-value="changeLanguage"
+            :options="languageOptions"
+            borderless
+            dense
+            emit-value
+            map-options
+            style="max-width: 150px"
+          >
+            <template v-slot:selected-item="props">
+              <q-item v-bind="props.itemProps" class="selected-item">
+                <q-item-section avatar>
+                  <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                </q-item-section>
+                <q-item-section>{{ props.opt.label }}</q-item-section>
+              </q-item>
+            </template>
+            <template v-slot:option="props">
+              <q-item v-bind="props.itemProps" class="option-item">
+                <q-item-section avatar>
+                  <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                </q-item-section>
+                <q-item-section>{{ props.opt.label }} </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
           <component
             :is="component"
             :nextPage="nextPage"
@@ -170,7 +198,9 @@ import axios from 'axios'
 import CategoryList from 'src/components/CategoryList.vue'
 import ProductCardPdf from 'src/components/ProductCardPdf.vue'
 import { onMounted, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { locale } = useI18n() // Access vue-i18n locale
 let products = ref([])
 let component = ref(CategoryList)
 let categoryName = ref('')
@@ -182,29 +212,50 @@ const tab = ref('')
 let ress = true
 let stepper = true
 //
+const languageOptions = [
+  { value: 'en', label: 'English', icon: '../../public/icons/en.svg' },
+  { value: 'uz', label: 'Uzbek', icon: '../../public/icons/uz.svg' },
+  { value: 'ru', label: 'Russian', icon: '../../public/icons/ru.svg' },
+]
+const selectedLang = ref(localStorage.getItem('language') || 'en')
 
+const changeLanguage = (lang) => {
+  locale.value = lang
+  localStorage.setItem('language', lang)
+}
 onMounted(() => {
   fetchCategory()
 })
 
 const fetchCategory = async function () {
   try {
-    const response = await axios.get('https://arbuzmarket.com/api/v1/Categories')
+    const response = await axios.get('https://arbuzmarket.com/api/v1/Categories', {
+      headers: {
+        Language: selectedLang.value,
+      },
+    })
     categorys.value = response.data.item
   } catch (error) {
     console.error('Error fetching products:', error)
   }
 }
 const fetchProducts = async function (id, page) {
-  console.log(id)
   tab.value = id
   try {
-    const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
-      page: page,
-      size: 1000,
-      categoryId: '' + id,
-      tab: null,
-    })
+    const response = await axios.post(
+      'https://arbuzmarket.com/api/v1/Products/filters',
+      {
+        page: page,
+        size: 1000,
+        categoryId: '' + id,
+        tab: null,
+      },
+      {
+        headers: {
+          Language: selectedLang.value,
+        },
+      },
+    )
     // const rest = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
     //   page: 1,
     //   size: 1000,
@@ -215,7 +266,6 @@ const fetchProducts = async function (id, page) {
     products.value = response.data.item
 
     if (ress) {
-      console.log('pagessss: ' + page)
       ress = false
       if (response.data.item.length < 12) {
         pages.value = null
@@ -223,14 +273,12 @@ const fetchProducts = async function (id, page) {
         pages.value = ++page
       }
     }
-    console.log('category id: ' + products.value)
   } catch (error) {
     console.error('Error fetching products:', error)
   }
 }
 // const addMore = async function () {
 //   if (pages.value != null) {
-//     console.log('pages: ' + pages.value)
 
 //     try {
 //       const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
@@ -269,17 +317,29 @@ const nextPage = (page) => {
   }
 }
 watch(
+  () => selectedLang.value,
+  () => {
+    if (stepper) {
+      pages.value = 1
+      ress = true
+      fetchProducts(tab.value, pagination.value)
+    }
+    fetchCategory()
+    stepper = true
+  },
+)
+watch(
   () => pagination.value,
   () => {
     if (stepper) {
       pages.value = 1
       ress = true
       fetchProducts(tab.value, pagination.value)
-      console.log(tab.value)
     }
     stepper = true
   },
 )
+
 // const getMinimumPrice = (item) => {
 //   const prices = item.variations[0].prices
 //     .map((price) => price.value)
@@ -306,11 +366,21 @@ watch(
     flex-direction: column;
   }
 }
+.q-item__section--avatar {
+  min-width: 20px !important;
+}
+.q-item__section--side {
+  max-width: 20px;
+  margin-right: 10px;
+}
 </style>
 
 <style lang="scss" scoped>
 .btn-wrapper {
   padding: 10px 20px;
+}
+.products {
+  position: relative;
 }
 .more-btn {
   cursor: pointer;
@@ -325,6 +395,16 @@ watch(
 }
 .hiro-section {
   display: flex;
+}
+.lang-select {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 .banner {
   width: 550px;

@@ -1,6 +1,6 @@
 <template>
   <div class="category">
-    <h5 class="text-h5 category-name text-weight-bold">Категории</h5>
+    <h5 class="text-h5 category-name text-weight-bold">{{ $t('categoryList') }}</h5>
     <div class="category-list">
       <div
         class="category-list__item"
@@ -17,6 +17,9 @@
         />
         <h5>{{ category.name }}</h5>
       </div>
+      <pre>
+        {{ props.categorys }}
+      </pre>
     </div>
   </div>
 </template>
@@ -32,7 +35,6 @@ const props = defineProps({
     required: true, // Ensure the array is passed
   },
 })
-console.log('Received props:', props)
 </script>
 <style>
 body {

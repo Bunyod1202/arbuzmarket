@@ -1,6 +1,8 @@
 <template>
   <div class="products-wrapper">
-    <button class="btn back-btn" @click="nextPage({ categoryId: null, nextPage: 0 })">назад</button>
+    <button class="btn back-btn" @click="nextPage({ categoryId: null, nextPage: 0 })">
+      {{ $t('back') }}
+    </button>
     <h4 class="text-h5 product-name text-weight-bold">{{ props.categoryName }}</h4>
     <div class="product-cards" v-if="props.products.length > 0">
       <div class="product-card" v-for="item in props.products" :key="item.id">
@@ -34,7 +36,7 @@
     <div class="" v-else>
       <div class="no-items">
         <img src="public/no-items.png" alt="" />
-        <h2 class="text-h5 category-name text-weight-bold">Попробуйте изменить параметры</h2>
+        <h2 class="text-h5 category-name text-weight-bold">{{ $t('products_not_found') }}</h2>
       </div>
     </div>
   </div>
