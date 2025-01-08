@@ -609,6 +609,9 @@ watch(
   .banner {
     height: 800px;
   }
+  .lang-select {
+    top: 40px;
+  }
   .banner_title {
     padding: 10px 40px;
     margin-top: 10px;

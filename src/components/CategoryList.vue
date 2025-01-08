@@ -123,6 +123,12 @@ body {
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .category-name {
+    text-align: center;
+    margin: 20px 0 40px 0px;
+  }
+}
 @media (max-width: 85em) {
   q-img__image {
     height: auto !important;

@@ -3,7 +3,9 @@
     <button class="btn back-btn" @click="nextPage({ categoryId: null, nextPage: 0 })">
       {{ $t('back') }}
     </button>
-    <h4 class="text-h5 product-name text-weight-bold">{{ props.categoryName }}</h4>
+    <h4 class="text-h5 product-name text-weight-bold">
+      <pre>{{ props.products[0]?.category?.name || props.categoryName }}</pre>
+    </h4>
     <div class="product-cards" v-if="props.products.length > 0">
       <div class="product-card" v-for="item in props.products" :key="item.id">
         <div class="product-card__details">
