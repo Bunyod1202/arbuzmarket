@@ -218,7 +218,7 @@ const languageOptions = [
   { value: 'ru', label: 'Russian', icon: '../../public/icons/ru.svg' },
 ]
 const selectedLang = ref(localStorage.getItem('language') || 'en')
-
+locale.value = selectedLang.value
 const changeLanguage = (lang) => {
   locale.value = lang
   localStorage.setItem('language', lang)
