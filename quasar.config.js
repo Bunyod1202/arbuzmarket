@@ -16,7 +16,13 @@ export default defineConfig((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ['app.scss'],
-
+    vite: {
+      resolve: {
+        alias: {
+          yandexMetrica: '/src/plugins/yandexMetrica.js',
+        },
+      },
+    },
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',
@@ -57,7 +63,14 @@ export default defineConfig((ctx) => {
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
-
+      meta: {
+        script: [
+          {
+            src: `https://mc.yandex.ru/metrika/tag.js`,
+            async: true,
+          },
+        ],
+      },
       vitePlugins: [
         [
           '@intlify/unplugin-vue-i18n/vite',
@@ -112,7 +125,7 @@ export default defineConfig((ctx) => {
       // Quasar plugins
       plugins: [],
     },
-
+    plugins: ['yandexMetrica'],
     // animations: 'all', // --- includes all animations
     // https://v2.quasar.dev/options/animations
     animations: [],

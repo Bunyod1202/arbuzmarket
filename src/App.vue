@@ -4,41 +4,23 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 onMounted(() => {
-  const scriptId = 'yandex-metrika-script'
-  if (!document.getElementById(scriptId)) {
-    // Create and add the Yandex Metrica script dynamically
-    const script = document.createElement('script')
-    script.id = scriptId
-    script.type = 'text/javascript'
-    script.async = true
-    script.src = 'https://mc.yandex.ru/metrika/tag.js'
+  if (window.Ya && window.Ya.Metrika2) {
+    const metrika = new window.Ya.Metrika2({
+      id: 99475151, // Replace with your Counter ID
+    })
 
-    script.onload = () => {
-      if (window.ym) {
-        window.ym(99475151, 'init', {
-          clickmap: true,
-          trackLinks: true,
-          accurateTrackBounce: true,
-          webvisor: true,
-          ecommerce: 'dataLayer',
-        })
-      }
-    }
+    // Track initial page load
+    metrika.hit(window.location.href)
 
-    script.onerror = () => {
-      console.error('Yandex Metrika failed to load.')
-    }
-
-    document.head.appendChild(script)
+    // Track route changes
+    router.afterEach((to) => {
+      metrika.hit(to.fullPath)
+    })
   }
-
-  // Add <noscript> alternative
-  const noscriptElement = document.createElement('noscript')
-  noscriptElement.innerHTML = `
-    <div><img src="https://mc.yandex.ru/watch/99475151" style="position:absolute; left:-9999px;" alt="" /></div>
-  `
-  document.body.appendChild(noscriptElement)
 })
 </script>
