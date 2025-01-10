@@ -4,7 +4,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/PdfPage.vue'), name: 'index' },
-      { path: '/pdf', component: () => import('pages/PdfPage.vue'), name: 'pdf' },
+      { path: '/pdf', component: () => import('pages/SomePage.vue'), name: 'pdf' },
     ],
   },
 
