@@ -15,7 +15,7 @@
           :alt="category.name"
           class="product-card__image"
         />
-        <h5>{{ category.name }}</h5>
+        <h5 class="category-name">{{ category.name }}</h5>
       </div>
     </div>
   </div>
@@ -139,6 +139,7 @@ body {
     grid-template-columns: repeat(3, minmax(0px, 1fr));
   }
 }
+
 @media (max-width: 70em) {
   .category-list {
     margin-bottom: 24px;
@@ -147,6 +148,11 @@ body {
   }
   .category-list__item {
     max-width: 480px;
+  }
+}
+@media (max-width: 400px) and (max-height: 700px) {
+  .category-name {
+    font-size: 10px !important;
   }
 }
 </style>

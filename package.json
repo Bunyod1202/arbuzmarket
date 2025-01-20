@@ -1,8 +1,8 @@
 {
   "name": "product-menu",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "ArbuzMarketMenu",
+  "description": "ProductsFromUZB",
+  "productName": "ProductsFromUZB",
   "author": "Bunyood <bunyodbunyod035@gmail.com>",
   "type": "module",
   "private": true,

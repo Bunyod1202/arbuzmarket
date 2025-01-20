@@ -860,6 +860,7 @@ watch(
     background-repeat: no-repeat;
   }
 }
+
 // @media screen and (max-height: 768px) {
 //   .banner {
 //     height: 1100px;
