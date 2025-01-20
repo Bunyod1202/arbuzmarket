@@ -448,7 +448,7 @@ watch(
   justify-content: space-between;
   align-items: center;
   margin-top: 2px;
-  background-color: #46760a;
+  background-color: #fe0115;
   border-radius: 15px;
   padding: 3px 10px;
   text-shadow: 0px 0px 4px rgb(0, 0, 0);
@@ -472,7 +472,7 @@ watch(
     text-decoration: none;
   }
   &:hover {
-    background-color: #6a983c;
+    background-color: #eded3b;
     .number-group__item__number {
       text-shadow: 0px 0px 4px rgb(255, 255, 255);
     }
@@ -506,8 +506,8 @@ watch(
   font-weight: 400;
   font-size: 18px;
   margin: 0;
-  color: #ffffff;
-  text-shadow: 0px 0px 5px #46760a;
+  color: #494848;
+  // text-shadow: 0px 0px 5px #46760a;
 }
 .banner_title {
   margin: 0 auto;

@@ -114,9 +114,9 @@ body {
     font-weight: 600;
   }
   &:hover {
-    border: 2px solid #46760a;
+    border: 2px solid #bd0211;
     transition: all 0.3s ease-in-out;
-    background-color: #6a983c;
+    background-color: #fe0115;
     h5 {
       color: #fff;
       transition: all 0.3s ease-in-out;
