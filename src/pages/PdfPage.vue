@@ -72,7 +72,7 @@
                 </defs>
               </svg>
             </a>
-            <a href="https://wa.me/message/NVL7PJ7D4O4FE1" target="blank"
+            <a href="https://whatsapp.com/channel/0029VaryG06CBtxHO23Jlh1w" target="blank"
               ><svg
                 width="141"
                 height="141"
@@ -87,7 +87,7 @@
                 />
               </svg>
             </a>
-            <a href="https://t.me/Kamoliddin3355" target="blank"
+            <a href="https://t.me/restaurantSkazka" target="blank"
               ><svg
                 width="141"
                 height="141"
