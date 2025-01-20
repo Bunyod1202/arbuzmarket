@@ -8,6 +8,6 @@ export default {
   },
   biSubscription: 'Bizga obuna bo‘ling:',
   categoryList: 'Kategoriyalar',
-  back: 'Orqaga',
+  back: 'Ortga',
   products_not_found: 'Mahsulotlar topilmadi',
 }
