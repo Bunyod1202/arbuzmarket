@@ -213,13 +213,7 @@ const pagination = ref(1)
 const tab = ref('')
 let ress = true
 let stepper = true
-let banner = ref(
-  locale.value === 'en'
-    ? '../bannerEn.png'
-    : locale.value === 'ru'
-      ? '../bannerRu.png'
-      : '../bannerUz.png',
-)
+
 //
 const languageOptions = [
   { value: 'en', label: 'English', icon: 'icons/en.svg' },
@@ -227,6 +221,13 @@ const languageOptions = [
   { value: 'ru', label: 'Russian', icon: 'icons/ru.svg' },
 ]
 const selectedLang = ref(localStorage.getItem('language') || 'en')
+let banner = ref(
+  selectedLang.value === 'en'
+    ? '../bannerEn.png'
+    : selectedLang.value === 'ru'
+      ? '../bannerRu.png'
+      : '../bannerUz.png',
+)
 locale.value = selectedLang.value
 const changeLanguage = (lang) => {
   locale.value = lang
