@@ -222,7 +222,20 @@ export default defineConfig((ctx) => {
         appId: 'product-menu',
       },
     },
+    htmlVariables: {
+      meta: [
+        // General meta tags
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 
+        // Open Graph meta tags
+        { property: 'og:title', content: 'Products from Uzbekistan' },
+        { property: 'og:description', content: 'Свежие продукты из солнечного Узбекистана' },
+        { property: 'og:image', content: 'https://productsfromuzb.netlify.app/bannerRu.png' },
+        { property: 'og:url', content: 'https://productsfromuzb.netlify.app/' },
+        { property: 'og:type', content: 'website' },
+      ],
+    },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
     bex: {
       // extendBexScriptsConf (esbuildConf) {},
