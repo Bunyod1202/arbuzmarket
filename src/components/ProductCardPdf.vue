@@ -220,7 +220,11 @@ const getMinimumPrice = (item) => {
 // @media screen and (max-width: 1200px) {
 
 // }
-
+@media screen and (max-width: 1024px) {
+  .product-cards {
+    height: auto !important;
+  }
+}
 @media screen and (max-width: 768px) {
   .product-name {
     margin-bottom: 55px;

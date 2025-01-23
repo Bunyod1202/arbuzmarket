@@ -150,6 +150,11 @@ body {
     max-width: 480px;
   }
 }
+@media screen and (max-width: 1024px) {
+  .category-list {
+    height: auto !important;
+  }
+}
 @media (max-width: 400px) and (max-height: 700px) {
   .category-name {
     font-size: 10px !important;

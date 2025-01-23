@@ -245,6 +245,7 @@ const fetchCategory = async function () {
       },
     })
     categorys.value = response.data.item
+    categorys.value.pop()
   } catch (error) {
     console.error('Error fetching products:', error)
   }
@@ -806,6 +807,9 @@ watch(
   }
   .hiro-section {
     flex-direction: column;
+  }
+  body {
+    overflow-y: auto;
   }
 }
 @media screen and (max-width: 768px) {
