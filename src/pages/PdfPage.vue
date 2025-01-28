@@ -1,16 +1,12 @@
 <template>
   <q-page>
     <div>
-      <!-- <button @click="generatePDF()">Download PDF</button> -->
       <div class="hiro-section">
         <div class="banner" :style="{ backgroundImage: 'url( ' + banner + ')' }">
-          <!-- <h1 class="banner_title">{{ $t('title') }}</h1>
+         <h1 class="banner_title">{{ $t('title') }}</h1>
           <p class="banner_description">
-            <img v-if="selectedLang == 'en'" src="../../public/description_en.png" alt="" />
-            <img v-if="selectedLang == 'ru'" src="../../public/description_ru.png" alt="" />
-            <img v-if="selectedLang == 'uz'" src="../../public/description_uz.png" alt="" />
-          </p> -->
-          <!-- <img class="banner_img" src="/pdfBanner.png" alt="" /> -->
+            {{ $t('description') }}
+          </p>
           <div class="number-group">
             <div class="click-to-call">
               <img src="../../public/arrow.gif" alt="" />
@@ -157,40 +153,9 @@
             :products="products"
             :categorys="categorys"
           />
-          <!-- <div v-if="products.length > 0" class="btn-wrapper">
-            <button v-if="pages != null" class="more-btn" @click="addMore()">Показать еще</button>
-            <q-pagination
-              v-if="pagelimit > 1"
-              class="pagination"
-              color="#6a983c"
-              v-model="pagination"
-              :max="pagelimit"
-              direction-links
-              gutter="sm"
-            />
-          </div> -->
-        </div>
-      </div>
-      <!-- <div class="banner">
 
-      </div>
-      <div class="product-list">
-        <div class="product-cards" v-for="item in chunkedArray" :key="item">
-          <h5 class="text-h5 category-name text-weight-bold" v-if="item?.category">
-            {{ item.category.name }}
-          </h5>
-          <div class="cards">
-            <ProductCardPdf
-              v-for="item in item.arr"
-              :key="item.id"
-              :imageSrc="item.variations[0].files[0]?.url"
-              :price="getMinimumPrice(item)"
-              :productName="item.name"
-              :productLink="'https://arbuzmarket.com/product/' + item.id"
-            />
-          </div>
         </div>
-      </div>-->
+      </div>
     </div>
   </q-page>
 </template>
@@ -202,12 +167,11 @@ import ProductCardPdf from 'src/components/ProductCardPdf.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const { locale } = useI18n() // Access vue-i18n locale
+const { locale } = useI18n()
 let products = ref([])
 let component = ref(CategoryList)
 let categoryName = ref('')
 let categorys = ref([])
-// let pagelimit = ref(0)
 const pages = ref(1)
 const pagination = ref(1)
 const tab = ref('')
@@ -223,10 +187,10 @@ const languageOptions = [
 const selectedLang = ref(localStorage.getItem('language') || 'en')
 let banner = ref(
   selectedLang.value === 'en'
-    ? '../bannerEn.png'
+    ? '../bannerEn.webp'
     : selectedLang.value === 'ru'
-      ? '../bannerRu.png'
-      : '../bannerUz.png',
+      ? '../bannerRu.webp'
+      : '../bannerUz.webp',
 )
 locale.value = selectedLang.value
 const changeLanguage = (lang) => {
@@ -267,13 +231,6 @@ const fetchProducts = async function (id, page) {
         },
       },
     )
-    // const rest = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
-    //   page: 1,
-    //   size: 1000,
-    //   categoryId: '' + id,
-    //   tab: null,
-    // })
-    // pagelimit.value = Math.ceil(rest.data.item.length / 12)
     products.value = response.data.item
 
     if (ress) {
@@ -356,16 +313,6 @@ watch(
     stepper = true
   },
 )
-
-// const getMinimumPrice = (item) => {
-//   const prices = item.variations[0].prices
-//     .map((price) => price.value)
-//     .filter((value) => value !== undefined)
-//   const res = prices.sort(function (a, b) {
-//     return a - b
-//   })
-//   return res[1] ? res[1] : res[2]
-// }
 </script>
 <style>
 .pagination {
@@ -508,53 +455,16 @@ watch(
   font-size: 18px;
   margin: 0;
   color: #494848;
-  // text-shadow: 0px 0px 5px #46760a;
 }
 .banner_title {
-  margin: 0 auto;
-  width: 70%;
-  text-align: center;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 22px;
-  color: #ffffff;
-
-  padding: 20px;
-  margin-top: 90px;
+ display: none;
 }
 .banner_description {
-  // font-weight: 400;
-  // font-size: 30px;
-  // line-height: 40px;
-  // color: #ffffff;
-  // text-shadow:
-  //   1px 1px 3px #497620,
-  //   0 0 1em #000,
-  //   0 0 0.2em #000;
-  // padding: 20px;
-  width: 400px;
-  height: 270px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: none;
 }
 @media screen and (max-width: 3840px) {
   .banner {
     width: 45%;
-  }
-  .banner_title {
-    margin-top: 280px;
-    font-size: 67px;
-    font-weight: 400;
-    line-height: 70px;
-  }
-  .banner_description {
-    width: 1100px;
-    height: 270px;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
   .click-to-call {
     position: absolute;
@@ -627,19 +537,7 @@ watch(
       height: 40px;
     }
   }
-  .banner_title {
-    font-size: 47px;
-    font-weight: 400;
-    line-height: 47px;
-    margin-top: 185px;
-  }
-  .banner_description {
-    width: 750px;
-    height: 270px;
-    top: 33%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+
   .social-media {
     display: block;
     a {
@@ -652,19 +550,7 @@ watch(
   }
 }
 @media screen and (max-width: 1920px) {
-  .banner_title {
-    margin-top: 135px;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 30px;
-  }
-  .banner_description {
-    width: 550px;
-    height: 270px;
-    top: 36%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+
   .click-to-call {
     position: absolute;
     top: 0px;
@@ -699,29 +585,12 @@ watch(
     }
   }
 }
-@media screen and (max-width: 1440px) {
-  .banner_title {
-    margin-top: 105px;
-  }
-  .banner_description {
-    width: 450px;
-    height: 270px;
-    top: 38%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
+
 @media screen and (max-width: 1394px) {
   .banner {
     width: 550px;
   }
-  .banner_description {
-    width: 400px;
-    height: 270px;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+
   .social-media {
     display: block;
     a {
@@ -733,32 +602,8 @@ watch(
     }
   }
 }
-@media screen and (max-width: 1366px) {
-  .banner_title {
-    margin-top: 90px;
-    font-size: 25px;
-    font-weight: 400;
-    line-height: 25px;
-  }
-}
-@media screen and (max-width: 1280px) {
-  .banner_title {
-    margin-top: 90px;
-    // font-size: 40px;
-    // line-height: 40px;
-  }
-}
 @media screen and (max-width: 1044px) {
-  .banner_title {
-    margin-top: 30px;
-    font-size: 40px;
-    line-height: 40px;
-  }
-  .banner_description {
-    margin-top: 20px;
-    font-size: 25px;
-    line-height: 30px;
-  }
+
   .social-media {
     a {
       display: block;
@@ -766,22 +611,7 @@ watch(
   }
 }
 @media screen and (max-width: 1024px) {
-  .banner_title {
-    padding: 10px 40px;
-    margin-top: 10px;
-    font-size: 70px;
-    line-height: 70px;
-  }
-  .banner_description {
-    // margin-top: 0px;
-    // padding: 10px 40px;
-    // font-size: 55px;
-    // line-height: 50px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+
   .number-group__item {
     &__title {
       font-size: 25px;
@@ -821,24 +651,7 @@ watch(
   .lang-select {
     top: 40px;
   }
-  .banner_title {
-    padding: 10px 40px;
-    margin-top: 10px;
-    font-size: 40px;
-    line-height: 40px;
-  }
-  .banner_description {
-    // margin-top: 0px;
-    // padding: 10px 40px;
-    // font-size: 25px;
-    // line-height: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 470px;
-  }
+
   .number-group {
     bottom: 130px;
     left: 50%;
@@ -864,89 +677,10 @@ watch(
     background-repeat: no-repeat;
   }
 }
-
-// @media screen and (max-height: 768px) {
-//   .banner {
-//     height: 1100px;
-//   }
-// }
-
 @media screen and (max-height: 480px) {
   .banner {
     height: 1000px;
   }
-  .banner_title {
-    padding: 10px 40px;
-    margin-top: 10px;
-    font-size: 40px;
-    line-height: 40px;
-  }
-  .banner_description {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 370px;
-  }
+
 }
-// .product-list {
-//   width: 100%;
-//   max-width: 1200px;
-//   margin: 0 auto;
-// }
-// .cards {
-//   width: 100%;
-//   margin-bottom: 1005px;
-//   // height: 3508px;
-//   display: grid;
-//   gap: 15px;
-//   grid-template-columns: repeat(4, minmax(0px, 1fr));
-// }
-// @media screen and (min-width: 20em) {
-//   .cards {
-//     margin-bottom: 24px;
-//     gap: 24px 22px;
-//     grid-template-columns: repeat(2, minmax(0px, 1fr));
-//   }
-// }
-// @media screen and (min-width: 35em) {
-//   .cards {
-//     margin-bottom: 24px;
-//     gap: 24px 22px;
-//     grid-template-columns: repeat(2, minmax(0px, 1fr));
-//   }
-// }
-// @media screen and (min-width: 40em) {
-//   .cards {
-//     margin-bottom: 24px;
-//     gap: 24px 22px;
-//     grid-template-columns: repeat(3, minmax(0px, 1fr));
-//   }
-// }
-// @media screen and (min-width: 60em) {
-//   .cards {
-//     margin-bottom: 24px;
-//     gap: 24px 22px;
-//     grid-template-columns: repeat(4, minmax(0px, 1fr));
-//   }
-// }
-// @media screen and (min-width: 70em) {
-//   .cards {
-//     margin-bottom: 24px;
-//     gap: 24px 22px;
-//     grid-template-columns: repeat(5, minmax(0px, 1fr));
-//   }
-// }
-// @media screen and (min-width: 85em) {
-//   .banner {
-//     width: 1000px;
-//     margin: 10px auto;
-//   }
-//   .cards {
-//     margin-bottom: 24px;
-//     gap: 24px 22px;
-//     grid-template-columns: repeat(6, minmax(0px, 1fr));
-//   }
-// }
 </style>

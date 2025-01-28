@@ -24,12 +24,12 @@
 <script setup>
 const props = defineProps({
   nextPage: {
-    type: Function, // Specify the prop type
-    required: true, // Ensure the function is passed
+    type: Function,
+    required: true,
   },
   categorys: {
-    type: Array, // Specify the prop type
-    required: true, // Ensure the array is passed
+    type: Array,
+    required: true,
   },
 })
 </script>

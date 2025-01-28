@@ -47,16 +47,16 @@
 <script setup>
 const props = defineProps({
   products: {
-    type: Array, // Specify the prop type
-    required: true, // Ensure the function is passed
+    type: Array,
+    required: true,
   },
   categoryName: {
-    type: String, // Specify the prop type
-    required: true, // Ensure the function is passed
+    type: String,
+    required: true,
   },
   nextPage: {
-    type: Function, // Specify the prop type
-    required: true, // Ensure the function is passed
+    type: Function,
+    required: true,
   },
 })
 const getMinimumPrice = (item) => {
@@ -207,19 +207,14 @@ const getMinimumPrice = (item) => {
   color: #1a202c;
   width: 100%;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Ko'rsatmoqchi bo'lgan qatorlar soni */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.5; /* Matnning qatordagi balandligi */
-  max-height: calc(1.5em * 3); /* Qator balandligi x qatorlar soni */
+  line-height: 1.5;
+  max-height: calc(1.5em * 3);
 }
-// @media screen and (max-width: 1394px) {
 
-// }
-// @media screen and (max-width: 1200px) {
-
-// }
 @media screen and (max-width: 1024px) {
   .product-cards {
     height: auto !important;
@@ -263,12 +258,12 @@ const getMinimumPrice = (item) => {
     color: #1a202c;
     width: 100%;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Ko'rsatmoqchi bo'lgan qatorlar soni */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.5; /* Matnning qatordagi balandligi */
-    max-height: calc(1.5em * 3); /* Qator balandligi x qatorlar soni */
+    line-height: 1.5;
+    max-height: calc(1.5em * 3);
   }
   .product-card__image {
     width: 100%;
