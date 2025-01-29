@@ -3,7 +3,7 @@
     <div>
       <div class="hiro-section">
         <div class="banner" :style="{ backgroundImage: 'url( ' + banner + ')' }">
-         <h1 class="banner_title">{{ $t('title') }}</h1>
+          <h1 class="banner_title">{{ $t('title') }}</h1>
           <p class="banner_description">
             {{ $t('description') }}
           </p>
@@ -153,7 +153,6 @@
             :products="products"
             :categorys="categorys"
           />
-
         </div>
       </div>
     </div>
@@ -166,7 +165,22 @@ import CategoryList from 'src/components/CategoryList.vue'
 import ProductCardPdf from 'src/components/ProductCardPdf.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useMeta } from 'quasar'
 
+useMeta({
+  title: 'Моя страница',
+  meta: {
+    description: {
+      name: 'description',
+      content:
+        'Products_fromUzb – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
+    },
+    title: { name: 'title', content: 'Products from Uzbekistan' },
+    image: { name: 'image', content: 'https://productsfromuzb.netlify.app/bannerRu.png' },
+    url: { name: 'url', content: 'https://productsfromuzb.netlify.app' },
+    type: { name: 'type', content: 'website' },
+  },
+})
 const { locale } = useI18n()
 let products = ref([])
 let component = ref(CategoryList)
@@ -457,7 +471,7 @@ watch(
   color: #494848;
 }
 .banner_title {
- display: none;
+  display: none;
 }
 .banner_description {
   display: none;
@@ -550,7 +564,6 @@ watch(
   }
 }
 @media screen and (max-width: 1920px) {
-
   .click-to-call {
     position: absolute;
     top: 0px;
@@ -603,7 +616,6 @@ watch(
   }
 }
 @media screen and (max-width: 1044px) {
-
   .social-media {
     a {
       display: block;
@@ -611,7 +623,6 @@ watch(
   }
 }
 @media screen and (max-width: 1024px) {
-
   .number-group__item {
     &__title {
       font-size: 25px;
@@ -681,6 +692,5 @@ watch(
   .banner {
     height: 1000px;
   }
-
 }
 </style>

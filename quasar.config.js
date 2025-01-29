@@ -235,6 +235,12 @@ export default defineConfig((ctx) => {
         { property: 'og:url', content: 'https://productsfromuzb.netlify.app/' },
         { property: 'og:type', content: 'website' },
       ],
+      metaTags: [
+    {
+      name: 'google-site-verification',
+      content: 'your_verification_code'
+    }
+  ]
     },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
     bex: {
