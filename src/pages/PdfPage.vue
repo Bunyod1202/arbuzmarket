@@ -168,7 +168,7 @@ import { useI18n } from 'vue-i18n'
 import { useMeta } from 'quasar'
 
 useMeta({
-  title: 'Моя страница',
+  title: 'Products from Uzbekistan',
   meta: {
     description: {
       name: 'description',
