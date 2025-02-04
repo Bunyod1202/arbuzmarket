@@ -118,6 +118,7 @@
           </div>
         </div>
         <div class="products" :style="{ width: pages < 1 ? '' : '100%' }">
+          <div class="" id="product-cards"></div>
           <div class="mobile_bar">
             <q-select
               class="lang-select"
@@ -171,10 +172,12 @@
               </template>
               <template v-slot:option="props">
                 <q-item v-bind="props.itemProps" class="option-item">
+                  <!-- <a href="#product-cards" class="category-option-item"> -->
                   <q-item-section avatar>
                     <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
                   </q-item-section>
                   <q-item-section>{{ props.opt.label }} </q-item-section>
+                  <!-- </a> -->
                 </q-item>
               </template>
             </q-select>
@@ -211,7 +214,6 @@ import ProductCardPdf from 'src/components/ProductCardPdf.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useMeta } from 'quasar'
-
 useMeta({
   title: 'Products from Uzbekistan',
   meta: {
@@ -263,6 +265,12 @@ const changeCategory = (id) => {
   selectedCategory.value = id
   pages.value = 1
   fetchProducts(id)
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, 300)
 }
 onMounted(() => {
   fetchCategory()
@@ -418,6 +426,13 @@ html {
 }
 .text-nowrap {
   white-space: nowrap;
+}
+.category-option-item {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
 

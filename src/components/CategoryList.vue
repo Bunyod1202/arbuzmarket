@@ -1,5 +1,5 @@
 <template>
-  <div class="category" id="#product-cards">
+  <div class="category">
     <!-- <h5 class="text-h5 category-name text-weight-bold">{{ $t('categoryList') }}</h5> -->
     <div class="category-list">
       <a
