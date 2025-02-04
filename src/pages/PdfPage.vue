@@ -837,7 +837,7 @@ html {
 }
 @media (max-width: 400px) and (max-height: 700px) {
   .category-name {
-    font-size: 10px !important;
+    font-size: 23px !important;
   }
 }
 </style>

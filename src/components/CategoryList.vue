@@ -153,4 +153,9 @@ body {
     height: auto !important;
   }
 }
+@media (max-width: 400px) and (max-height: 700px) {
+  .category-name {
+    font-size: 14px !important;
+  }
+}
 </style>
