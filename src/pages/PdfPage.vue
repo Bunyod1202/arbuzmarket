@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <div class="hiro-section">
-        <div class="banner" :style="{ backgroundImage: 'url( ' + banner + ')' }">
+        <div class="banner" v-if="pages < 1" :style="{ backgroundImage: 'url( ' + banner + ')' }">
           <h1 class="banner_title">{{ $t('title') }}</h1>
           <p class="banner_description">
             {{ $t('description') }}
@@ -117,35 +117,80 @@
             </a>
           </div>
         </div>
-        <div class="products">
-          <q-select
-            class="lang-select"
-            v-model="selectedLang"
-            @update:model-value="changeLanguage"
-            :options="languageOptions"
-            borderless
-            dense
-            emit-value
-            map-options
-            style="max-width: 150px"
-          >
-            <template v-slot:selected-item="props">
-              <q-item v-bind="props.itemProps" class="selected-item">
-                <q-item-section avatar>
-                  <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
-                </q-item-section>
-                <q-item-section>{{ props.opt.label }}</q-item-section>
-              </q-item>
-            </template>
-            <template v-slot:option="props">
-              <q-item v-bind="props.itemProps" class="option-item">
-                <q-item-section avatar>
-                  <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
-                </q-item-section>
-                <q-item-section>{{ props.opt.label }} </q-item-section>
-              </q-item>
-            </template>
-          </q-select>
+        <div class="products" :style="{ width: pages < 1 ? '' : '100%' }">
+          <div class="mobile_bar">
+            <q-select
+              class="lang-select"
+              v-model="selectedLang"
+              @update:model-value="changeLanguage"
+              :options="languageOptions"
+              borderless
+              dense
+              emit-value
+              map-options
+              style="max-width: 150px"
+            >
+              <template v-slot:selected-item="props">
+                <q-item v-bind="props.itemProps" class="selected-item">
+                  <q-item-section avatar>
+                    <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                  </q-item-section>
+                  <q-item-section>{{ props.opt.label }}</q-item-section>
+                </q-item>
+              </template>
+              <template v-slot:option="props">
+                <q-item v-bind="props.itemProps" class="option-item">
+                  <q-item-section avatar>
+                    <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                  </q-item-section>
+                  <q-item-section>{{ props.opt.label }} </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+            <q-select
+              class="category-select"
+              v-if="pages == 1"
+              v-model="selectedCategory"
+              @update:model-value="changeCategory"
+              :options="categoryOptions"
+              borderless
+              dense
+              emit-value
+              map-options
+              style="max-width: 500px"
+            >
+              <template v-slot:selected-item="props">
+                <q-item v-bind="props.itemProps" class="selected-item">
+                  <q-item-section avatar>
+                    <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                  </q-item-section>
+                  <q-item-section class="text-h5 text-nowrap text-weight-bold">
+                    {{ props.opt.label }}
+                  </q-item-section>
+                </q-item>
+              </template>
+              <template v-slot:option="props">
+                <q-item v-bind="props.itemProps" class="option-item">
+                  <q-item-section avatar>
+                    <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                  </q-item-section>
+                  <q-item-section>{{ props.opt.label }} </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+
+            <h5 class="text-h5 category-name text-weight-bold" v-else>{{ $t('categoryList') }}</h5>
+
+            <button
+              class="btn back-btn"
+              v-if="pages > 0"
+              @click="nextPage({ categoryId: null, nextPage: 0 })"
+            >
+              <a href="#product-cards">
+                {{ $t('back') }}
+              </a>
+            </button>
+          </div>
           <component
             :is="component"
             :nextPage="nextPage"
@@ -185,11 +230,14 @@ const { locale } = useI18n()
 let products = ref([])
 let component = ref(CategoryList)
 let categoryName = ref('')
+let selectedCategory = ref('')
+let categoryOptions = ref([])
 let categorys = ref([])
-const pages = ref(1)
+const pages = ref(0)
 const pagination = ref(1)
 const tab = ref('')
-let ress = true
+// let ress = true
+// let ress = true
 let stepper = true
 
 //
@@ -211,6 +259,11 @@ const changeLanguage = (lang) => {
   locale.value = lang
   localStorage.setItem('language', lang)
 }
+const changeCategory = (id) => {
+  selectedCategory.value = id
+  pages.value = 1
+  fetchProducts(id)
+}
 onMounted(() => {
   fetchCategory()
 })
@@ -224,6 +277,11 @@ const fetchCategory = async function () {
     })
     categorys.value = response.data.item
     categorys.value.pop()
+    categoryOptions.value = []
+    categorys.value.forEach((item) => {
+      console.log(item)
+      categoryOptions.value.push({ value: item.id, label: item.name, icon: item.image.url })
+    })
   } catch (error) {
     console.error('Error fetching products:', error)
   }
@@ -247,14 +305,14 @@ const fetchProducts = async function (id, page) {
     )
     products.value = response.data.item
 
-    if (ress) {
-      ress = false
-      if (response.data.item.length < 12) {
-        pages.value = null
-      } else {
-        pages.value = ++page
-      }
-    }
+    // if (ress) {
+    //   ress = false
+    //   if (response.data.item.length < 12) {
+    //     pages.value = null
+    //   } else {
+    //     pages.value = ++page
+    //   }
+    // }
   } catch (error) {
     console.error('Error fetching products:', error)
   }
@@ -285,15 +343,16 @@ const nextPage = (page) => {
   switch (page.nextPage) {
     case 0:
       component.value = CategoryList
-      pages.value = 1
+      pages.value = 0
       pagination.value = 1
-      ress = true
+      // ress = true
       stepper = true
       break
     case 1:
       component.value = ProductCardPdf
       categoryName.value = page.categoryName
-
+      pages.value = 1
+      selectedCategory.value = page.categoryId
       fetchProducts(page.categoryId, pagination.value)
       break
   }
@@ -302,8 +361,8 @@ watch(
   () => selectedLang.value,
   () => {
     if (stepper) {
-      pages.value = 1
-      ress = true
+      // pages.value = 1
+      // ress = true
       fetchProducts(tab.value, pagination.value)
       banner.value =
         locale.value === 'en'
@@ -320,8 +379,8 @@ watch(
   () => pagination.value,
   () => {
     if (stepper) {
-      pages.value = 1
-      ress = true
+      // pages.value = 1
+      // ress = true
       fetchProducts(tab.value, pagination.value)
     }
     stepper = true
@@ -329,6 +388,9 @@ watch(
 )
 </script>
 <style>
+html {
+  scroll-behavior: smooth;
+}
 .pagination {
   justify-content: center;
   margin: 7px 0;
@@ -351,14 +413,47 @@ watch(
   max-width: 20px;
   margin-right: 10px;
 }
+.q-field--auto-height {
+  height: auto !important;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
 </style>
 
 <style lang="scss" scoped>
+.category-name {
+  text-align: center;
+  margin: 20px 0;
+}
 .btn-wrapper {
   padding: 10px 20px;
 }
 .products {
   position: relative;
+}
+.mobile_bar {
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  // display: flex;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  padding: 15px;
+  height: 80px;
+  background-color: #fff;
+  z-index: 2;
+  box-shadow: 0px 2px 10px 2px rgba(211, 211, 211, 0.733);
+  .category-name {
+    width: 100%;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
 }
 .more-btn {
   cursor: pointer;
@@ -404,6 +499,18 @@ watch(
   bottom: 20px;
   left: 20px;
   z-index: 3;
+}
+.category-select {
+  // width: 100%;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 3;
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 .number-group__item {
   display: flex;
@@ -475,6 +582,31 @@ watch(
 }
 .banner_description {
   display: none;
+}
+.back-btn {
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 30px;
+  background-color: transparent;
+  border: 2px solid #46760a;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 4px 18px 4px 35px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('../arrow.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }
 @media screen and (max-width: 3840px) {
   .banner {
@@ -654,15 +786,25 @@ watch(
   }
 }
 @media screen and (max-width: 768px) {
+  .mobile_bar {
+    height: 120px;
+  }
+  .category-name {
+    display: block;
+    text-align: center;
+    margin: 20px 0 40px 0px;
+  }
   .banner {
     height: 600px;
     background-size: contain;
     background-repeat: no-repeat;
   }
   .lang-select {
-    top: 40px;
+    top: 60px;
   }
-
+  .back-btn {
+    top: 70px;
+  }
   .number-group {
     bottom: 130px;
     left: 50%;
@@ -691,6 +833,11 @@ watch(
 @media screen and (max-height: 480px) {
   .banner {
     height: 1000px;
+  }
+}
+@media (max-width: 400px) and (max-height: 700px) {
+  .category-name {
+    font-size: 10px !important;
   }
 }
 </style>

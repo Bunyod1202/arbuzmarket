@@ -1,9 +1,10 @@
 <template>
-  <div class="category">
-    <h5 class="text-h5 category-name text-weight-bold">{{ $t('categoryList') }}</h5>
+  <div class="category" id="#product-cards">
+    <!-- <h5 class="text-h5 category-name text-weight-bold">{{ $t('categoryList') }}</h5> -->
     <div class="category-list">
-      <div
+      <a
         class="category-list__item"
+        href="#product-cards"
         v-for="category in props.categorys"
         :key="category.id"
         @click="nextPage({ categoryId: category.id, categoryName: category.name, nextPage: 1 })"
@@ -16,7 +17,7 @@
           class="product-card__image"
         />
         <h5 class="category-name">{{ category.name }}</h5>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -46,10 +47,6 @@ body {
 </style>
 
 <style lang="scss" scoped>
-.category-name {
-  text-align: center;
-  margin: 20px 0;
-}
 .product-card__image {
   height: auto !important;
   border-radius: 30px;
@@ -82,6 +79,7 @@ body {
   }
 }
 .category-list__item {
+  text-decoration: none;
   cursor: pointer;
   width: 100%;
   transition: all 0.3s ease-in-out;
@@ -153,11 +151,6 @@ body {
 @media screen and (max-width: 1024px) {
   .category-list {
     height: auto !important;
-  }
-}
-@media (max-width: 400px) and (max-height: 700px) {
-  .category-name {
-    font-size: 10px !important;
   }
 }
 </style>

@@ -1,12 +1,14 @@
 <template>
   <div class="products-wrapper">
-    <button class="btn back-btn" @click="nextPage({ categoryId: null, nextPage: 0 })">
-      {{ $t('back') }}
-    </button>
-    <h4 class="text-h5 product-name text-weight-bold">
-      <pre>{{ props.products[0]?.category?.name || props.categoryName }}</pre>
-    </h4>
-    <div class="product-cards" v-if="props.products.length > 0">
+    <!-- <div class="mobile_bar"> -->
+    <!-- <button class="btn back-btn" @click="nextPage({ categoryId: null, nextPage: 0 })">
+        {{ $t('back') }}
+      </button> -->
+    <!-- <h4 class="text-h5 product-name text-weight-bold">
+        {{ props.products[0]?.category?.name || props.categoryName }}
+      </h4> -->
+    <!-- </div> -->
+    <div class="product-cards" v-if="props.products.length > 0" id="#product-cards">
       <div class="product-card" v-for="item in props.products" :key="item.id">
         <div class="product-card__details">
           <q-skeleton v-if="!item.variations[0].files[0]?.url" height="150px" square />
@@ -79,10 +81,7 @@ const getMinimumPrice = (item) => {
   position: relative;
   width: 100%;
 }
-.product-name {
-  text-align: center;
-  margin: 20px 0;
-}
+
 .no-items {
   margin-top: 80px;
   width: 100%;
@@ -97,7 +96,7 @@ const getMinimumPrice = (item) => {
 .product-cards {
   padding: 20px;
   width: 100%;
-  height: 90vh;
+  height: 85vh;
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
@@ -124,31 +123,6 @@ const getMinimumPrice = (item) => {
   }
 }
 
-.back-btn {
-  cursor: pointer;
-  position: absolute;
-  left: 20px;
-  top: 0px;
-  background-color: transparent;
-  border: 2px solid #46760a;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 4px 18px 4px 35px;
-  &::before {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 20px;
-    height: 20px;
-    background-image: url('../arrow.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-}
 .product-card {
   text-decoration: none;
   height: 290px;
@@ -221,12 +195,6 @@ const getMinimumPrice = (item) => {
   }
 }
 @media screen and (max-width: 768px) {
-  .product-name {
-    margin-bottom: 55px;
-  }
-  .back-btn {
-    top: 35px;
-  }
   .product-cards {
     gap: 10px;
 
