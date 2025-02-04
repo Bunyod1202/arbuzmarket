@@ -287,7 +287,6 @@ const fetchCategory = async function () {
     categorys.value.pop()
     categoryOptions.value = []
     categorys.value.forEach((item) => {
-      console.log(item)
       categoryOptions.value.push({ value: item.id, label: item.name, icon: item.image.url })
     })
   } catch (error) {
