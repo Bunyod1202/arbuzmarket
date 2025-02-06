@@ -230,17 +230,21 @@ export default defineConfig((ctx) => {
 
         // Open Graph meta tags
         { property: 'og:title', content: 'Products from Uzbekistan' },
-        { property: 'og:description', content: 'Products_fromUzb – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.' },
-        { property: 'og:image', content: 'https://productsfromuzb.netlify.app/bannerRu.png' },
-        { property: 'og:url', content: 'https://productsfromuzb.netlify.app/' },
+        {
+          property: 'og:description',
+          content:
+            'Products_fromUzb – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
+        },
+        { property: 'og:image', content: 'https://productsfromuzb.uz/bannerRu.png' },
+        { property: 'og:url', content: 'https://productsfromuzb.uz/' },
         { property: 'og:type', content: 'website' },
       ],
       metaTags: [
-    {
-      name: 'google-site-verification',
-      content: 'your_verification_code'
-    }
-  ]
+        {
+          name: 'google-site-verification',
+          content: 'your_verification_code',
+        },
+      ],
     },
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
     bex: {

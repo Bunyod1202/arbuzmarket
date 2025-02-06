@@ -223,8 +223,8 @@ useMeta({
         'Products_fromUzb – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
     },
     title: { name: 'title', content: 'Products from Uzbekistan' },
-    image: { name: 'image', content: 'https://productsfromuzb.netlify.app/bannerRu.png' },
-    url: { name: 'url', content: 'https://productsfromuzb.netlify.app' },
+    image: { name: 'image', content: 'https://productsfromuzb.uz/bannerRu.png' },
+    url: { name: 'url', content: 'https://productsfromuzb.uz' },
     type: { name: 'type', content: 'website' },
   },
 })
