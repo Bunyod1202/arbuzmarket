@@ -8,7 +8,12 @@
         {{ props.products[0]?.category?.name || props.categoryName }}
       </h4> -->
     <!-- </div> -->
-    <div class="product-cards" v-if="props.products.length > 0">
+    <div
+      class="product-cards"
+      v-if="props.products.length > 0"
+      @contextmenu.prevent
+      @dragstart.prevent
+    >
       <div class="product-card" v-for="item in props.products" :key="item.id">
         <div class="product-card__details">
           <q-skeleton v-if="!item.variations[0].files[0]?.url" height="150px" square />
