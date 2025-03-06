@@ -214,31 +214,31 @@ import ProductCardPdf from 'src/components/ProductCardPdf.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useMeta } from 'quasar'
-onMounted(() => {
-  document.addEventListener('contextmenu', (event) => event.preventDefault()) // Disable right-click
+// onMounted(() => {
+//   document.addEventListener('contextmenu', (event) => event.preventDefault()) // Disable right-click
 
-  document.addEventListener('keydown', (event) => {
-    if (
-      event.key === 'F12' ||
-      (event.ctrlKey && event.shiftKey && event.key === 'I') ||
-      (event.ctrlKey && event.shiftKey && event.key === 'J') ||
-      (event.ctrlKey && event.key === 'U')
-    ) {
-      event.preventDefault()
-    }
-  })
+//   document.addEventListener('keydown', (event) => {
+//     if (
+//       event.key === 'F12' ||
+//       (event.ctrlKey && event.shiftKey && event.key === 'I') ||
+//       (event.ctrlKey && event.shiftKey && event.key === 'J') ||
+//       (event.ctrlKey && event.key === 'U')
+//     ) {
+//       event.preventDefault()
+//     }
+//   })
 
-  // Detect DevTools Opened
-  setInterval(() => {
-    if (
-      window.outerHeight - window.innerHeight > 200 ||
-      window.outerWidth - window.innerWidth > 200
-    ) {
-      alert('Developer tools are open!')
-      window.location.href = 'about:blank' // Redirect to a blank page
-    }
-  }, 1000)
-})
+//   // Detect DevTools Opened
+//   setInterval(() => {
+//     if (
+//       window.outerHeight - window.innerHeight > 200 ||
+//       window.outerWidth - window.innerWidth > 200
+//     ) {
+//       alert('Developer tools are open!')
+//       window.location.href = 'about:blank' // Redirect to a blank page
+//     }
+//   }, 1000)
+// })
 useMeta({
   title: 'Products from Uzbekistan',
   meta: {
