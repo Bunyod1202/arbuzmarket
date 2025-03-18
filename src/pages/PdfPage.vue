@@ -163,9 +163,12 @@
               <template v-slot:selected-item="props">
                 <q-item v-bind="props.itemProps" class="selected-item">
                   <q-item-section avatar>
-                    <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                    <q-img width="30px" :src="props.opt.icon" :alt="props.opt.label" />
                   </q-item-section>
-                  <q-item-section class="text-h5 text-nowrap text-weight-bold">
+                  <q-item-section
+                    style="margin-left: 10px"
+                    class="text-h5 text-nowrap text-weight-bold"
+                  >
                     {{ props.opt.label }}
                   </q-item-section>
                 </q-item>
@@ -174,9 +177,9 @@
                 <q-item v-bind="props.itemProps" class="option-item">
                   <!-- <a href="#product-cards" class="category-option-item"> -->
                   <q-item-section avatar>
-                    <q-img width="20px" :src="props.opt.icon" :alt="props.opt.label" />
+                    <q-img width="25px" :src="props.opt.icon" :alt="props.opt.label" />
                   </q-item-section>
-                  <q-item-section>{{ props.opt.label }} </q-item-section>
+                  <q-item-section style="margin-left: 10px">{{ props.opt.label }} </q-item-section>
                   <!-- </a> -->
                 </q-item>
               </template>
@@ -240,14 +243,14 @@ import { useMeta } from 'quasar'
 //   }, 1000)
 // })
 useMeta({
-  title: 'Products from Uzbekistan',
+  title: 'Skazka Market',
   meta: {
     description: {
       name: 'description',
       content:
-        'Products_fromUzb – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
+        'Skazka Market – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
     },
-    title: { name: 'title', content: 'Products from Uzbekistan' },
+    title: { name: 'title', content: 'Skazka Market' },
     image: { name: 'image', content: 'https://productsfromuzb.uz/bannerRu.png' },
     url: { name: 'url', content: 'https://productsfromuzb.uz' },
     type: { name: 'type', content: 'website' },
@@ -312,7 +315,7 @@ const fetchCategory = async function () {
     categorys.value.pop()
     categoryOptions.value = []
     categorys.value.forEach((item) => {
-      categoryOptions.value.push({ value: item.id, label: item.name, icon: item.image.url })
+      categoryOptions.value.push({ value: item.id, label: item.name, icon: item.icon.url })
     })
   } catch (error) {
     console.error('Error fetching products:', error)

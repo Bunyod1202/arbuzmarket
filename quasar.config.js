@@ -229,11 +229,11 @@ export default defineConfig((ctx) => {
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 
         // Open Graph meta tags
-        { property: 'og:title', content: 'Products from Uzbekistan' },
+        { property: 'og:title', content: 'Skazka Market' },
         {
           property: 'og:description',
           content:
-            'Products_fromUzb – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
+            'Skazka Market – доставляет лучшие продукты из солнечного Узбекистана прямо к вашему порогу в ОАЭ. Насладитесь ароматом свежих фруктов, овощей, мяса, сухофруктов, напитков и сладостей, а также редкими деликатесами, которые так сложно найти за пределами родины. Все это теперь доступно в несколько кликов. Закажите прямо сейчас и получите быструю и бесплатную доставку.',
         },
         { property: 'og:image', content: 'https://productsfromuzb.uz/bannerRu.png' },
         { property: 'og:url', content: 'https://productsfromuzb.uz/' },
