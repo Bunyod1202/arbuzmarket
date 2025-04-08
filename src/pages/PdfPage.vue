@@ -401,10 +401,10 @@ watch(
       fetchProducts(tab.value, pagination.value)
       banner.value =
         locale.value === 'en'
-          ? '../bannerEn.png'
+          ? '../bannerEn.webp'
           : locale.value === 'ru'
-            ? '../bannerRu.png'
-            : '../bannerUz.png'
+            ? '../bannerRu.webp'
+            : '../bannerUz.webp'
     }
     fetchCategory()
     stepper = true
