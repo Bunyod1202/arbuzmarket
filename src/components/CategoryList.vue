@@ -2,9 +2,11 @@
   <div class="category">
     <!-- <h5 class="text-h5 category-name text-weight-bold">{{ $t('categoryList') }}</h5> -->
     <div class="category-list">
-      <a
+      <router-link
         class="category-list__item"
-        href="#product-cards"
+        :to="{
+          path: `/products/${category.id}`,
+        }"
         v-for="category in props.categorys"
         :key="category.id"
         @click="nextPage({ categoryId: category.id, categoryName: category.name, nextPage: 1 })"
@@ -15,9 +17,15 @@
           spinner-color="primary"
           :alt="category.name"
           class="product-card__image"
-        />
+        >
+          <template v-slot:error>
+            <div class="absolute-full flex flex-center bg-negative text-white">
+              Cannot load image
+            </div>
+          </template>
+        </q-img>
         <h5 class="category-name">{{ category.name }}</h5>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>

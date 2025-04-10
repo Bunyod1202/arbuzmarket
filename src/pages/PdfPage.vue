@@ -116,6 +116,15 @@
               </svg>
             </a>
           </div>
+          <!-- <div class="banner-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" id="arrow">
+              <path
+                width="100"
+                height="100"
+                d="M13 0C5.826 0 0 5.826 0 13s5.826 13.002 13 13.002S26 20.174 26 13 20.174 0 13 0zm0 1c6.633 0 12 5.367 12 12s-5.367 12-12 12S1 19.633 1 13 6.367 1 13 1zm-.85 4a.5.5 0 0 0-.507.508v.002a.5.5 0 0 0 .507.492h2.047a.5.5 0 1 0 0-1.002H12.15zm0 2.002a.5.5 0 0 0-.507.508.5.5 0 0 0 .507.492h2.047a.5.5 0 1 0 0-1H12.15zm-.05 2.002a.5.5 0 0 0-.457.504v.002a.5.5 0 0 0 .507.492h2.047a.5.5 0 1 0 0-.998H12.15a.5.5 0 0 0-.05 0zm.054 1.994a.5.5 44.999 0 0-.5.5v5.51H9.998a.5.5 44.999 0 0-.498.49v.01a.5.5 44.999 0 0 .146.361l2.993 2.985a.5.5 44.999 0 0 .707 0l3.006-3a.5.5 44.999 0 0-.356-.854H14.7v-5.502a.5.5 44.999 0 0-.5-.5h-2.045zM12.652 12H13.7v5.498a.5.5 44.999 0 0 .492.5h.3a.5.5 44.999 0 0 .011 0h.285l-1.797 1.791-1.781-1.777h.289a.5.5 44.999 0 0 .012 0l.652-.016a.5.5 44.999 0 0 .49-.498V12z"
+              ></path>
+            </svg>
+          </div> -->
         </div>
         <div class="products" :style="{ width: pages < 1 ? '' : '100%' }">
           <div class="" id="product-cards"></div>
@@ -192,18 +201,14 @@
               v-if="pages > 0"
               @click="nextPage({ categoryId: null, nextPage: 0 })"
             >
-              <a href="#product-cards">
+              <a href="">
                 {{ $t('back') }}
               </a>
             </button>
           </div>
-          <component
-            :is="component"
-            :nextPage="nextPage"
-            :categoryName="categoryName"
-            :products="products"
-            :categorys="categorys"
-          />
+          <keep-alive>
+            <component :is="component" :nextPage="nextPage" :categorys="categoryStore.categories" />
+          </keep-alive>
         </div>
       </div>
     </div>
@@ -211,37 +216,17 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import CategoryList from 'src/components/CategoryList.vue'
-import ProductCardPdf from 'src/components/ProductCardPdf.vue'
-import { onMounted, ref, watch } from 'vue'
+// import ProductCardPdf from 'src/components/ProductCardPdf.vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useMeta } from 'quasar'
-// onMounted(() => {
-//   document.addEventListener('contextmenu', (event) => event.preventDefault()) // Disable right-click
+import { useCategoryStore } from 'src/stores/category'
+import { useLangStore } from 'src/stores/lang.js'
+const langStore = useLangStore()
+const categoryStore = useCategoryStore()
 
-//   document.addEventListener('keydown', (event) => {
-//     if (
-//       event.key === 'F12' ||
-//       (event.ctrlKey && event.shiftKey && event.key === 'I') ||
-//       (event.ctrlKey && event.shiftKey && event.key === 'J') ||
-//       (event.ctrlKey && event.key === 'U')
-//     ) {
-//       event.preventDefault()
-//     }
-//   })
-
-//   // Detect DevTools Opened
-//   setInterval(() => {
-//     if (
-//       window.outerHeight - window.innerHeight > 200 ||
-//       window.outerWidth - window.innerWidth > 200
-//     ) {
-//       alert('Developer tools are open!')
-//       window.location.href = 'about:blank' // Redirect to a blank page
-//     }
-//   }, 1000)
-// })
+const isMobile = () => window.innerWidth <= 1025
 useMeta({
   title: 'Skazka Market',
   meta: {
@@ -257,17 +242,9 @@ useMeta({
   },
 })
 const { locale } = useI18n()
-let products = ref([])
 let component = ref(CategoryList)
-let categoryName = ref('')
-let selectedCategory = ref('')
-let categoryOptions = ref([])
-let categorys = ref([])
 const pages = ref(0)
 const pagination = ref(1)
-const tab = ref('')
-// let ress = true
-// let ress = true
 let stepper = true
 
 //
@@ -276,7 +253,7 @@ const languageOptions = [
   { value: 'uz', label: 'Uzbek', icon: 'icons/uz.svg' },
   { value: 'ru', label: 'Russian', icon: 'icons/ru.svg' },
 ]
-const selectedLang = ref(localStorage.getItem('language') || 'en')
+const selectedLang = ref(langStore.selectedLang)
 let banner = ref(
   selectedLang.value === 'en'
     ? '../bannerEn.webp'
@@ -287,93 +264,22 @@ let banner = ref(
 locale.value = selectedLang.value
 const changeLanguage = (lang) => {
   locale.value = lang
-  localStorage.setItem('language', lang)
+  langStore.setLanguage(lang)
 }
-const changeCategory = (id) => {
-  selectedCategory.value = id
-  pages.value = 1
-  fetchProducts(id)
-  setTimeout(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }, 300)
-}
-onMounted(() => {
-  fetchCategory()
+onMounted(async () => {
+  if (isMobile()) {
+    await nextTick()
+    setTimeout(() => {
+      window.scrollTo({
+        top: 300,
+        behavior: 'smooth',
+      })
+    }, 3000)
+  }
+  if (categoryStore.categories.length === 0) {
+    categoryStore.fetchCategory()
+  }
 })
-
-const fetchCategory = async function () {
-  try {
-    const response = await axios.get('https://arbuzmarket.com/api/v1/Categories', {
-      headers: {
-        Language: selectedLang.value,
-      },
-    })
-    categorys.value = response.data.item
-    categorys.value.pop()
-    categoryOptions.value = []
-    categorys.value.forEach((item) => {
-      categoryOptions.value.push({ value: item.id, label: item.name, icon: item.icon.url })
-    })
-  } catch (error) {
-    console.error('Error fetching products:', error)
-  }
-}
-const fetchProducts = async function (id, page) {
-  tab.value = id
-  try {
-    const response = await axios.post(
-      'https://arbuzmarket.com/api/v1/Products/filters',
-      {
-        page: page,
-        size: 1000,
-        categoryId: '' + id,
-        tab: null,
-      },
-      {
-        headers: {
-          Language: selectedLang.value,
-        },
-      },
-    )
-    products.value = response.data.item
-
-    // if (ress) {
-    //   ress = false
-    //   if (response.data.item.length < 12) {
-    //     pages.value = null
-    //   } else {
-    //     pages.value = ++page
-    //   }
-    // }
-  } catch (error) {
-    console.error('Error fetching products:', error)
-  }
-}
-// const addMore = async function () {
-//   if (pages.value != null) {
-
-//     try {
-//       const response = await axios.post('https://arbuzmarket.com/api/v1/Products/filters', {
-//         page: pages.value,
-//         size: 12,
-//         categoryId: '' + tab.value,
-//         tab: null,
-//       })
-//       pages.value++
-//       if (response.data.item.length < 12) {
-//         pages.value = null
-//       }
-//       products.value = [...products.value, ...response.data.item]
-//       ++pagination.value
-//       stepper = false
-//     } catch (error) {
-//       console.error('Error fetching products:', error)
-//     }
-//   }
-// }
 const nextPage = (page) => {
   switch (page.nextPage) {
     case 0:
@@ -383,22 +289,12 @@ const nextPage = (page) => {
       // ress = true
       stepper = true
       break
-    case 1:
-      component.value = ProductCardPdf
-      categoryName.value = page.categoryName
-      pages.value = 1
-      selectedCategory.value = page.categoryId
-      fetchProducts(page.categoryId, pagination.value)
-      break
   }
 }
 watch(
   () => selectedLang.value,
   () => {
     if (stepper) {
-      // pages.value = 1
-      // ress = true
-      fetchProducts(tab.value, pagination.value)
       banner.value =
         locale.value === 'en'
           ? '../bannerEn.webp'
@@ -406,18 +302,7 @@ watch(
             ? '../bannerRu.webp'
             : '../bannerUz.webp'
     }
-    fetchCategory()
-    stepper = true
-  },
-)
-watch(
-  () => pagination.value,
-  () => {
-    if (stepper) {
-      // pages.value = 1
-      // ress = true
-      fetchProducts(tab.value, pagination.value)
-    }
+    categoryStore.fetchCategory(selectedLang.value)
     stepper = true
   },
 )
@@ -430,6 +315,7 @@ html {
   justify-content: center;
   margin: 7px 0;
 }
+
 .text-white {
   background-color: #6a983c;
 }
@@ -464,6 +350,9 @@ html {
 </style>
 
 <style lang="scss" scoped>
+.banner-arrow {
+  display: none;
+}
 .category-name {
   text-align: center;
   margin: 20px 0;
@@ -864,6 +753,13 @@ html {
     background-size: contain;
     background-repeat: no-repeat;
   }
+  // .banner-arrow {
+  //   z-index: 5;
+  //   display: block;
+  //   position: fixed;
+  //   right: 10px;
+  //   top: 60%;
+  // }
 }
 @media (max-width: 360px) and (max-height: 720px) {
   .banner {

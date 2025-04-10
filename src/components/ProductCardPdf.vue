@@ -14,33 +14,53 @@
       @contextmenu.prevent
       @dragstart.prevent
     >
-      <div class="product-card" v-for="item in props.products" :key="item.id">
-        <div class="product-card__details">
-          <q-skeleton v-if="!item.variations[0].files[0]?.url" height="150px" square />
-          <q-img
-            :src="item.variations[0].files[0]?.url"
-            spinner-color="primary"
-            :alt="item.name"
-            class="product-card__image"
-          />
-
-          <div class="product-card__name">
-            {{ item.name }}
-            <q-tooltip
-              anchor="top middle"
-              self="bottom middle"
-              class="tooltip top bg-lime-11 text-grey-10 text-body2 text-caption"
-              :offset="[10, 10]"
+      <q-intersection
+        transition="scale"
+        class="product-card"
+        v-for="item in props.products"
+        :key="item.id"
+      >
+        <div class="product-card__wrapper">
+          <div class="product-card__details">
+            <!-- <q-skeleton v-if="item.variations[0].files[0]?.url" height="150px" square /> -->
+            <!-- <q-skeleton height="200px" square /> -->
+            <!-- spinner-color="primary" -->
+            <q-img
+              :src="item.variations[0].files[0]?.url"
+              :alt="item.name"
+              easy-load
+              class="product-card__image"
             >
+              <template v-slot:loading>
+                <div class="text-subtitle1 text-white">
+                  <img width="150" :src="banner" alt="" />
+                </div>
+              </template>
+              <template v-slot:error>
+                <div class="absolute-full flex flex-center bg-negative text-white">
+                  Cannot load image
+                </div>
+              </template>
+            </q-img>
+
+            <div class="product-card__name">
               {{ item.name }}
-            </q-tooltip>
+              <q-tooltip
+                anchor="top middle"
+                self="bottom middle"
+                class="tooltip top bg-lime-11 text-grey-10 text-body2 text-caption"
+                :offset="[10, 10]"
+              >
+                {{ item.name }}
+              </q-tooltip>
+            </div>
+          </div>
+
+          <div class="product-card__price">
+            <span class="product-card__price__normal">{{ getMinimumPrice(item) }} AED</span>
           </div>
         </div>
-
-        <div class="product-card__price">
-          <span class="product-card__price__normal">{{ getMinimumPrice(item) }} AED</span>
-        </div>
-      </div>
+      </q-intersection>
     </div>
     <div class="" v-else>
       <div class="no-items">
@@ -52,6 +72,10 @@
 </template>
 
 <script setup>
+import { useLangStore } from 'src/stores/lang.js'
+import { ref } from 'vue'
+
+const langStore = useLangStore()
 const props = defineProps({
   products: {
     type: Array,
@@ -66,6 +90,14 @@ const props = defineProps({
     required: true,
   },
 })
+const selectedLang = ref(langStore.selectedLang)
+let banner = ref(
+  selectedLang.value === 'en'
+    ? '../bannerEn.webp'
+    : selectedLang.value === 'ru'
+      ? '../bannerRu.webp'
+      : '../bannerUz.webp',
+)
 const getMinimumPrice = (item) => {
   const prices = item.variations[0].prices
     .map((price) => price.value)
@@ -77,11 +109,20 @@ const getMinimumPrice = (item) => {
 }
 </script>
 <style>
+.product-card__wrapper {
+  height: 258px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .q-img__image {
   object-fit: contain !important;
 }
 </style>
 <style lang="scss" scoped>
+.product-card__details {
+  height: 100%;
+}
 .products-wrapper {
   position: relative;
   width: 100%;
@@ -153,6 +194,7 @@ const getMinimumPrice = (item) => {
 }
 
 .product-card__price {
+  margin-top: auto;
   position: relative;
   font-size: 16px;
   font-weight: bold;
@@ -207,6 +249,9 @@ const getMinimumPrice = (item) => {
   }
 }
 @media screen and (max-width: 500px) {
+  .product-card__wrapper {
+    height: 190px;
+  }
   .product-card {
     text-decoration: none;
     height: 200px;
@@ -248,6 +293,14 @@ const getMinimumPrice = (item) => {
   .product-card__price {
     font-size: 14px;
     padding: 4px;
+  }
+}
+@media screen and (max-width: 414px) {
+  .product-card {
+    width: 45%;
+    .product-card__image {
+      width: 100%;
+    }
   }
 }
 </style>

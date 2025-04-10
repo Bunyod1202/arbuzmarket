@@ -2,7 +2,14 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/PdfPage.vue'), name: 'index' }],
+    children: [
+      { path: '', component: () => import('pages/PdfPage.vue'), name: 'index' },
+      {
+        path: '/products/:category',
+        component: () => import('pages/ProductsPage.vue'),
+        name: 'products',
+      },
+    ],
   },
 
   // Always leave this as last one,
