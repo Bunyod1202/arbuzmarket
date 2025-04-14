@@ -23,8 +23,8 @@
         <div class="product-card__wrapper">
           <div class="product-card__details">
             <!-- <q-skeleton v-if="item.variations[0].files[0]?.url" height="150px" square /> -->
-            <!-- <q-skeleton height="200px" square /> -->
-            <!-- spinner-color="primary" -->
+
+            <!-- -->
             <q-img
               :src="item.variations[0].files[0]?.url"
               :alt="item.name"
@@ -33,7 +33,7 @@
             >
               <template v-slot:loading>
                 <div class="text-subtitle1 text-white">
-                  <img width="150" :src="banner" alt="" />
+                  <q-skeleton height="200px" width="200px" class="bg-orange" square />
                 </div>
               </template>
               <template v-slot:error>
@@ -72,10 +72,10 @@
 </template>
 
 <script setup>
-import { useLangStore } from 'src/stores/lang.js'
-import { ref } from 'vue'
+// import { useLangStore } from 'src/stores/lang.js'
+// import { ref } from 'vue'
 
-const langStore = useLangStore()
+// const langStore = useLangStore()
 const props = defineProps({
   products: {
     type: Array,
@@ -90,14 +90,14 @@ const props = defineProps({
     required: true,
   },
 })
-const selectedLang = ref(langStore.selectedLang)
-let banner = ref(
-  selectedLang.value === 'en'
-    ? '../bannerEn.webp'
-    : selectedLang.value === 'ru'
-      ? '../bannerRu.webp'
-      : '../bannerUz.webp',
-)
+// const selectedLang = ref(langStore.selectedLang)
+// let banner = ref(
+//   selectedLang.value === 'en'
+//     ? '../bannerEn.webp'
+//     : selectedLang.value === 'ru'
+//       ? '../bannerRu.webp'
+//       : '../bannerUz.webp',
+// )
 const getMinimumPrice = (item) => {
   const prices = item.variations[0].prices
     .map((price) => price.value)
