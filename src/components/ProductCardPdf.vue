@@ -22,9 +22,6 @@
       >
         <div class="product-card__wrapper">
           <div class="product-card__details">
-            <!-- <q-skeleton v-if="item.variations[0].files[0]?.url" height="150px" square /> -->
-
-            <!-- -->
             <q-img
               :src="item.variations[0].files[0]?.url"
               :alt="item.name"
@@ -72,10 +69,6 @@
 </template>
 
 <script setup>
-// import { useLangStore } from 'src/stores/lang.js'
-// import { ref } from 'vue'
-
-// const langStore = useLangStore()
 const props = defineProps({
   products: {
     type: Array,
@@ -90,14 +83,7 @@ const props = defineProps({
     required: true,
   },
 })
-// const selectedLang = ref(langStore.selectedLang)
-// let banner = ref(
-//   selectedLang.value === 'en'
-//     ? '../bannerEn.webp'
-//     : selectedLang.value === 'ru'
-//       ? '../bannerRu.webp'
-//       : '../bannerUz.webp',
-// )
+
 const getMinimumPrice = (item) => {
   const prices = item.variations[0].prices
     .map((price) => price.value)
