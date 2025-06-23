@@ -53,7 +53,7 @@
             </div>
             <div class="social-media">
               <a
-                href="https://www.instagram.com/products_fromuzb/profilecard/?igsh=MW9ueDM2dTd6Z2pyYw=="
+                href="https://www.instagram.com/skazkamarket.uae?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="blank"
                 ><svg
                   width="141"
