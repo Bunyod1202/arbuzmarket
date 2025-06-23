@@ -27,7 +27,7 @@
           <div class="social-media">
             <p class="social-media__text">{{ $t('biSubscription') }}</p>
             <a
-              href="https://www.instagram.com/products_fromuzb/profilecard/?igsh=MW9ueDM2dTd6Z2pyYw=="
+              href="https://www.instagram.com/skazkamarket.uae"
               target="blank"
               ><svg
                 width="141"
